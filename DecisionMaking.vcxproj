@@ -166,6 +166,9 @@
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Transition.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Graph.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
