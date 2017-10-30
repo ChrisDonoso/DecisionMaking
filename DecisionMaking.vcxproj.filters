@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="decisionmaking\DecisionMaking.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StateMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,7 +30,10 @@
     <ClCompile Include="Action.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="decisionmaking\pch.cpp">
+    <ClCompile Include="DecisionMaking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +53,10 @@
     <ClInclude Include="Action.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="decisionmaking\pch.h">
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionMaking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
