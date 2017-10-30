@@ -9,7 +9,7 @@ int main()
 {
 	//std::cout << "Test";
 
-	printf("Test\n\n");
+	printf("Testtt\n\n");
 
     return 0;
 }
