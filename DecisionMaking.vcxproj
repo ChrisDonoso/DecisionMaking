@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionList.cpp" />
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="DecisionMaking.cpp" />
     <ClCompile Include="pch.cpp" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionList.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="DecisionMaking.h" />
     <ClInclude Include="pch.h" />

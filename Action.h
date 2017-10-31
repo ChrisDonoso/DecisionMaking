@@ -1,8 +1,20 @@
 #pragma once
-class Action
-{
-public:
-	Action();
-	~Action();
-};
+#include "pch.h"
 
+namespace DecisionMaking
+{
+	class Action
+	{
+	public:
+		Action();
+
+		void operator()();
+		//Action& operator=();
+
+		~Action();
+		
+	private:
+		std::string mName;
+	};
+
+}

@@ -1,8 +1,16 @@
 #pragma once
-class Condition
-{
-public:
-	Condition();
-	~Condition();
-};
+#include "pch.h"
 
+namespace DecisionMaking
+{
+	class Condition
+	{
+	public:
+		Condition();
+
+		bool operator()();
+		//Condition& operator=();
+
+		~Condition();
+	};
+}
