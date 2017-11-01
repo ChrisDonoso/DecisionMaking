@@ -9,8 +9,8 @@ namespace DecisionMaking
 	public:
 		StateMachine();
 
-		void AddState();
-		void AddStates();
+		void AddState(std::shared_ptr<State> state);
+		void AddStates(std::map<std::string, std::shared_ptr<State>> states);
 		std::shared_ptr<State> CurrentState();
 		void Initialize();
 		//StateMachine& operator=();

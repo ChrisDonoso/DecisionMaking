@@ -10,7 +10,12 @@
 #include <stdlib.h>
 #include <iostream>
 
+#include "StateMachine.h"
+#include "State.h"
+#include "Action.h"
+
 using namespace std;
+using namespace DecisionMaking;
 //using namespace Desc
 
 /*namespace DecisionMaking
@@ -21,6 +26,13 @@ using namespace std;
 	
 	int main()
 	{
+		StateMachine game;
+
+		shared_ptr<State> one = make_shared<State>("one");
+
+		auto states = { one };
+
+		game.AddStates(states);
 		//std::vector<std::list<int>> mAdjacencyList;
 
 		//std::vector<int> mTest;
