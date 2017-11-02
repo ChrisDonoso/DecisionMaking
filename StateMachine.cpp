@@ -9,12 +9,13 @@ namespace DecisionMaking
 
 	void StateMachine::AddState(std::shared_ptr<State> state)
 	{
+		//mStates.insert(state->Name, state);
 		//mStates.insert("one", state);
 	}
 
 	void StateMachine::AddStates(std::map<std::string, std::shared_ptr<State>> states)
 	{
-		states.
+		//mStates.insert(states);
 	}
 
 	std::shared_ptr<State> StateMachine::CurrentState()
@@ -26,8 +27,9 @@ namespace DecisionMaking
 	{
 	}
 
-	void StateMachine::SetCurrentState()
+	void StateMachine::SetCurrentState(std::shared_ptr<State> state)
 	{
+		mCurrentState = state;
 	}
 
 	const std::map<std::string, std::shared_ptr<State>>& StateMachine::States()

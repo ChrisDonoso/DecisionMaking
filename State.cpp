@@ -19,6 +19,7 @@ namespace DecisionMaking
 
 	void State::AddTransition()
 	{
+
 	}
 
 	void State::AddTransitions()

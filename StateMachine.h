@@ -14,7 +14,7 @@ namespace DecisionMaking
 		std::shared_ptr<State> CurrentState();
 		void Initialize();
 		//StateMachine& operator=();
-		void SetCurrentState();
+		void SetCurrentState(std::shared_ptr<State> state);
 		const std::map<std::string, std::shared_ptr<State>>& States();
 		std::shared_ptr<State> Update();
 
