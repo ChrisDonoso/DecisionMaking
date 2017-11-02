@@ -28,11 +28,47 @@ using namespace DecisionMaking;
 	{
 		StateMachine game;
 
+		//Creating states.
 		shared_ptr<State> one = make_shared<State>("one");
+		shared_ptr<State> two = make_shared<State>("two");
+		shared_ptr<State> three = make_shared<State>("three");
+		shared_ptr<State> four = make_shared<State>("four");
+		shared_ptr<State> five = make_shared<State>("five");
+		shared_ptr<State> six = make_shared<State>("six");
+		shared_ptr<State> seven = make_shared<State>("seven");
+		shared_ptr<State> eight = make_shared<State>("eight");
+		shared_ptr<State> nine = make_shared<State>("nine");
 
-		auto states = { one };
+
+		//Adding states.
+		game.AddState(one);
+		game.AddState(two);
+		game.AddState(three);
+		game.AddState(four);
+		game.AddState(five);
+		game.AddState(six);
+		game.AddState(seven);
+		game.AddState(eight);
+		game.AddState(nine);
+
+		/*
+		Another way to possibly add it is
+
+		auto states = { one, two, three, four, five, six, seven, eight, nine};
 
 		game.AddStates(states);
+		*/
+
+		game.SetCurrentState(one);
+
+		//game.AddTransition(condition, two);
+
+
+
+
+		//auto states = { one };
+
+		//game.AddStates(states);
 		//std::vector<std::list<int>> mAdjacencyList;
 
 		//std::vector<int> mTest;
