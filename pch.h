@@ -13,6 +13,9 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <list>
+#include <fstream>
+#include <iostream>
 
 
 // TODO: reference additional headers your program requires here
