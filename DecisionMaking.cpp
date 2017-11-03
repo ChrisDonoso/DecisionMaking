@@ -65,121 +65,123 @@ using namespace DecisionMaking;
 		//game.AddTransition(condition, two);
 
 
+		//Graph stuff
+		{
+			//auto states = { one };
+
+			//game.AddStates(states);
+			//std::vector<std::list<int>> mAdjacencyList;
+
+			//std::vector<int> mTest;
+			////mTest.reserve(3);
+
+			///*int array[10];
+			//array[0] = 1;*/
+			//mTest.push_back(10);
+			//mTest.push_back(22);
+
+			////cout << mTest.size() << "\n" << endl;
+
+			//list<int> testList;
+			///*testList.push_back(10);
+			//testList.push_back(5);*/
+
+			////mAdjacencyList.push_back(testList);
+
+			///*for (auto n : mAdjacencyList[0])
+			//{
+			//	cout << n << " ";
+			//}
+
+			//cout << endl;*/
+
+			///*for (unsigned int i = 0; i < mAdjacencyList[0].size(); i++)
+			//{
+			//	cout << mAdjacencyList[0].
+			//}*/
+
+			////mAdjacencyList[0].push_back(100);
+
+			///*for (unsigned int i = 0; i < mTest.size(); i++)
+			//{
+			//	cout << mTest.at(i) << "\n";
+			//}*/
+			////mTest.at(0) = 1;
+
+			////mTest.reserve(10);
+			////mTest[1] = 1;
+			////mTest.push_back(10);
+			////int node;
+			////std::cout << "Test";
+
+			//ifstream graph;
+
+			//graph.open("Graph.txt");
+
+			////mAdjacencyList.
+			///*int node;
+			//node = graph.get();
+
+			//cout << char(node) << endl;
+
+			//node = graph.get();
+
+			//cout << char(node) << endl;
+
+			//node = graph.get();
+
+			//cout << char(node) << endl;
+			//node = graph.get();
+
+			//cout << char(node) << endl;*/
 
 
-		//auto states = { one };
 
-		//game.AddStates(states);
-		//std::vector<std::list<int>> mAdjacencyList;
+			//for (int i = 0; i < 9; i++)
+			//{
+			//	testList.clear();
 
-		//std::vector<int> mTest;
-		////mTest.reserve(3);
+			//	for (int j = 0; j < 9; j++)
+			//	{
+			//		//node = graph.get();
 
-		///*int array[10];
-		//array[0] = 1;*/
-		//mTest.push_back(10);
-		//mTest.push_back(22);
+			//		if (char(graph.get()) == '1')//graph.get() == 1)
+			//		{
+			//			testList.push_back(j);
+			//			//mAdjacencyList[i].push_back(testList);
+			//			//mAdjacencyList[i].push_back(j);
+			//		}
+			//	}
 
-		////cout << mTest.size() << "\n" << endl;
+			//	mAdjacencyList.push_back(testList);
 
-		//list<int> testList;
-		///*testList.push_back(10);
-		//testList.push_back(5);*/
+			//	if (mAdjacencyList[i].size() > 0)
+			//	{
+			//		for (auto n : mAdjacencyList[i])
+			//		{
+			//			cout << n << " ";
+			//		}
 
-		////mAdjacencyList.push_back(testList);
+			//		cout << endl;
+			//	}
+			//}
 
-		///*for (auto n : mAdjacencyList[0])
-		//{
-		//	cout << n << " ";
-		//}
+			////for (int 1 = 0; i < 9; i++)
 
-		//cout << endl;*/
+			////mAdjacencyList[0].push_back(10);
+			////printf("Testtt\n\n");
 
-		///*for (unsigned int i = 0; i < mAdjacencyList[0].size(); i++)
-		//{
-		//	cout << mAdjacencyList[0].
-		//}*/
+			////cout << mAdjacencyList.size() << "\n" << endl;
 
-		////mAdjacencyList[0].push_back(100);
+			///*for (unsigned int i = 0; i < mAdjacencyList.size(); i++)
+			//{
+			//	cout << i << "\n" << endl;
+			//}*/
+			////cout << "tttt" << endl;
 
-		///*for (unsigned int i = 0; i < mTest.size(); i++)
-		//{
-		//	cout << mTest.at(i) << "\n";
-		//}*/
-		////mTest.at(0) = 1;
+			//graph.close();
+		}
 
-		////mTest.reserve(10);
-		////mTest[1] = 1;
-		////mTest.push_back(10);
-		////int node;
-		////std::cout << "Test";
-
-		//ifstream graph;
-
-		//graph.open("Graph.txt");
-
-		////mAdjacencyList.
-		///*int node;
-		//node = graph.get();
-
-		//cout << char(node) << endl;
-
-		//node = graph.get();
-
-		//cout << char(node) << endl;
-
-		//node = graph.get();
-
-		//cout << char(node) << endl;
-		//node = graph.get();
-
-		//cout << char(node) << endl;*/
-
-
-
-		//for (int i = 0; i < 9; i++)
-		//{
-		//	testList.clear();
-
-		//	for (int j = 0; j < 9; j++)
-		//	{
-		//		//node = graph.get();
-
-		//		if (char(graph.get()) == '1')//graph.get() == 1)
-		//		{
-		//			testList.push_back(j);
-		//			//mAdjacencyList[i].push_back(testList);
-		//			//mAdjacencyList[i].push_back(j);
-		//		}
-		//	}
-
-		//	mAdjacencyList.push_back(testList);
-
-		//	if (mAdjacencyList[i].size() > 0)
-		//	{
-		//		for (auto n : mAdjacencyList[i])
-		//		{
-		//			cout << n << " ";
-		//		}
-
-		//		cout << endl;
-		//	}
-		//}
-
-		////for (int 1 = 0; i < 9; i++)
-
-		////mAdjacencyList[0].push_back(10);
-		////printf("Testtt\n\n");
-
-		////cout << mAdjacencyList.size() << "\n" << endl;
-
-		///*for (unsigned int i = 0; i < mAdjacencyList.size(); i++)
-		//{
-		//	cout << i << "\n" << endl;
-		//}*/
-		////cout << "tttt" << endl;
-
-		//graph.close();
 
 		return 0;
 	}

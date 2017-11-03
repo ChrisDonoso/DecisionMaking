@@ -11,12 +11,23 @@ namespace DecisionMaking
 	{
 		//mStates.insert(state->Name, state);
 		//mStates.insert("one", state);
+
+
+		//I think it's one of these two for insertion. I think it's the make_pair, but I'm not sure.
+		//http://en.cppreference.com/w/cpp/container/map/emplace
+
+
+		mStates.emplace(std::make_pair(state->Name(), state));
+		
+		//mStates.emplace("one", state);
+
+
 	}
 
-	void StateMachine::AddStates(std::map<std::string, std::shared_ptr<State>> states)
-	{
-		//mStates.insert(states);
-	}
+	//void StateMachine::AddStates(std::map<std::string, std::shared_ptr<State>> states)
+	//{
+	//	//mStates.insert(states);
+	//}
 
 	std::shared_ptr<State> StateMachine::CurrentState()
 	{
