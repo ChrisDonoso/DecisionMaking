@@ -39,20 +39,20 @@ using namespace DecisionMaking;
 		/*auto enter = make_shared<GenericAction>(Enter);
 		auto exit = make_shared<GenericAction>(Exit);*/
 
-		/*auto enter = make_shared<GenericAction>([](const State& state)
+		auto enter = make_shared<GenericAction>([](const State& state)
 		{
 			cout << state.Name() << "::Enter()" << endl;
 		});
 
-		auto exit = make_shared<GenericAction>([](const State& state)
+		/*auto exit = make_shared<GenericAction>([](const State& state)
 		{
 			cout << state.Name() << "::Exit()" << endl;
 		});*/
 
-		auto genericCondition = make_shared<GenericCondition>([]()
+		/*auto genericCondition = make_shared<GenericCondition>([]()
 		{
 		
-		});
+		});*/
 
 		//Creating states.
 		shared_ptr<State> one = make_shared<State>("one");//, enter, exit);
@@ -77,8 +77,8 @@ using namespace DecisionMaking;
 		game.AddState(eight);
 		game.AddState(nine);
 
-		auto oneToTwo = make_shared<Transition>(one, genericCondition);
-		one->AddTransition(oneToTwo);
+		//auto oneToTwo = make_shared<Transition>(one, genericCondition);
+		//one->AddTransition(oneToTwo);
 
 		/*
 		Another way to possibly add it is

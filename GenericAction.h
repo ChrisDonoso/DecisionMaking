@@ -4,14 +4,33 @@
 
 namespace DecisionMaking
 {
+	template<typename T>
 	class GenericAction : public Action
 	{
 	public:
-		GenericAction();
+		GenericAction()
+		{
 
-		virtual void operator()() override;
-		GenericAction& operator=(const GenericAction& rhs) = default;
+		}
 
-		~GenericAction();
+		GenericAction(std::function<void(const State&)>)
+		{
+
+		}
+
+		virtual void operator()() override
+		{
+
+		}
+
+		GenericAction& operator=(const GenericAction& rhs) = default
+		{
+
+		};
+
+		~GenericAction()
+		{
+
+		}
 	};
 }
