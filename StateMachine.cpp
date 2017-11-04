@@ -41,6 +41,8 @@ namespace DecisionMaking
 	void StateMachine::SetCurrentState(std::shared_ptr<State> state)
 	{
 		mCurrentState = state;
+
+		mCurrentState->Enter();
 	}
 
 	const std::map<std::string, std::shared_ptr<State>>& StateMachine::States()

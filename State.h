@@ -13,6 +13,7 @@ namespace DecisionMaking
 	public:
 		const State();
 		const State(std::string name);
+		const State(std::string name, std::shared_ptr<Action> enter);
 		const State(std::string name, std::shared_ptr<Action> enter, std::shared_ptr<Action> exit);
 
 		void AddTransition(std::shared_ptr<Transition> transition);
@@ -22,9 +23,9 @@ namespace DecisionMaking
 		std::shared_ptr<Action> GetEnter();
 		std::shared_ptr<Action> GetExit();
 		const std::string& Name() const;
-		//State& operator=();
-		void SetEnter();
-		void SetExit();
+		//State& operator=(const State& state);
+		void SetEnter(std::shared_ptr<Action> enter);
+		void SetExit(std::shared_ptr<Action> exit);
 		void SetName(std::string name);
 		const std::vector<std::shared_ptr<Transition>>& Transitions();
 		std::shared_ptr<State> Update();

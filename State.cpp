@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "State.h"
+#include "Action.h"
 
 namespace DecisionMaking
 {
@@ -10,6 +11,12 @@ namespace DecisionMaking
 	State::State(std::string name)
 	{
 		SetName(name);
+	}
+
+	State::State(std::string name, std::shared_ptr<Action> enter)
+	{
+		SetName(name);
+		mEnter = enter;
 	}
 
 
@@ -37,10 +44,18 @@ namespace DecisionMaking
 
 	void State::Enter()
 	{
+		if (mEnter != nullptr)
+		{
+			(*mEnter)(*this);
+		}
 	}
 
 	void State::Exit()
 	{
+		if (mExit != nullptr)
+		{
+			(*mExit)(*this);
+		}
 	}
 
 	std::shared_ptr<Action> State::GetEnter()
@@ -58,12 +73,22 @@ namespace DecisionMaking
 		return mName;
 	}
 
-	void State::SetEnter()
+	//State & State::operator=(const State& state)
+	//{
+	//	//(void)state;
+	//		//State target = state;
+	//	// TODO: insert return statement here
+	//	//return state;
+	//}
+
+	void State::SetEnter(std::shared_ptr<Action> enter)
 	{
+		mEnter = enter;
 	}
 
-	void State::SetExit()
+	void State::SetExit(std::shared_ptr<Action> exit)
 	{
+		mExit = exit;
 	}
 
 	void State::SetName(std::string name)

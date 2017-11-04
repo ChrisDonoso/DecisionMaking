@@ -4,33 +4,44 @@
 
 namespace DecisionMaking
 {
-	template<typename T>
+	class State;
+	//template<typename T>
 	class GenericAction : public Action
 	{
 	public:
-		GenericAction()
+
+		//typedef std::function<void(const State&)> ActionFunction;
+
+		GenericAction();
+		/*{
+
+		}*/
+
+		//ActionFunction Function() const;
+
+		GenericAction(std::function<void(const State&)> function);
+		/*{
+
+		}*/
+
+		/*void setFunction(ActionFunction function)
 		{
 
-		}
+		}*/
 
-		GenericAction(std::function<void(const State&)>)
-		{
+		virtual void operator()(const State& state) override;
+		/*{
 
-		}
+		}*/
 
-		virtual void operator()() override
-		{
+		GenericAction& operator=(const GenericAction& rhs) = default;
+		/*{
 
-		}
+		};*/
 
-		GenericAction& operator=(const GenericAction& rhs) = default
-		{
+		~GenericAction();
+		/*{
 
-		};
-
-		~GenericAction()
-		{
-
-		}
+		}*/
 	};
 }

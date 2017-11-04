@@ -7,9 +7,18 @@ namespace DecisionMaking
 	{
 	}
 
-	void Action::operator()()
+	void Action::operator()(const State& state)
 	{
+		(void)state;
 	}
+
+	//Action& Action::operator=(const State& state)
+	//{
+	//	(void)state;
+	//	// TODO: insert return statement here
+	//	return 
+	//}
+
 
 
 	/*Action::~Action()

@@ -3,13 +3,15 @@
 
 namespace DecisionMaking
 {
+	class State;
+
 	class Action
 	{
 	public:
 		Action();
 
-		virtual void operator()() = 0;
-		//Action& operator=();
+		virtual void operator()(const State& state) = 0;
+		//Action& operator=(const State& state);// = default;
 
 		virtual ~Action() = default;
 		
