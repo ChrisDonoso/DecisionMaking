@@ -8,6 +8,9 @@
 #include "State.h"
 #include "Action.h"
 #include "GenericAction.h"
+#include "Condition.h"
+#include "GenericCondition.h"
+#include "Transition.h"
 
 using namespace std;
 using namespace DecisionMaking;
@@ -19,7 +22,7 @@ using namespace DecisionMaking;
 	{
 	}*/
 
-	void Enter(const State& state)
+	/*void Enter(const State& state)
 	{
 		cout << state.Name() << "::Enter()" << endl;
 	}
@@ -27,14 +30,14 @@ using namespace DecisionMaking;
 	void Exit(const State& state)
 	{
 		cout << state.Name() << "::Exit()" << endl;
-	}
+	}*/
 	
 	int main()
 	{
 		StateMachine game;
 
-		auto enter = make_shared<GenericAction>(Enter);
-		auto exit = make_shared<GenericAction>(Exit);
+		/*auto enter = make_shared<GenericAction>(Enter);
+		auto exit = make_shared<GenericAction>(Exit);*/
 
 		/*auto enter = make_shared<GenericAction>([](const State& state)
 		{
@@ -46,16 +49,21 @@ using namespace DecisionMaking;
 			cout << state.Name() << "::Exit()" << endl;
 		});*/
 
+		auto genericCondition = make_shared<GenericCondition>([]()
+		{
+		
+		});
+
 		//Creating states.
-		shared_ptr<State> one = make_shared<State>("one", enter, exit);
-		shared_ptr<State> two = make_shared<State>("two", enter, exit);
-		shared_ptr<State> three = make_shared<State>("three", enter, exit);
-		shared_ptr<State> four = make_shared<State>("four", enter, exit);
-		shared_ptr<State> five = make_shared<State>("five", enter, exit);
-		shared_ptr<State> six = make_shared<State>("six", enter, exit);
-		shared_ptr<State> seven = make_shared<State>("seven", enter, exit);
-		shared_ptr<State> eight = make_shared<State>("eight", enter, exit);
-		shared_ptr<State> nine = make_shared<State>("nine", enter, exit);
+		shared_ptr<State> one = make_shared<State>("one");//, enter, exit);
+		shared_ptr<State> two = make_shared<State>("two");//, enter, exit);
+		shared_ptr<State> three = make_shared<State>("three");//, enter, exit);
+		shared_ptr<State> four = make_shared<State>("four");//, enter, exit);
+		shared_ptr<State> five = make_shared<State>("five");//, enter, exit);
+		shared_ptr<State> six = make_shared<State>("six");//, enter, exit);
+		shared_ptr<State> seven = make_shared<State>("seven");//, enter, exit);
+		shared_ptr<State> eight = make_shared<State>("eight");//, enter, exit);
+		shared_ptr<State> nine = make_shared<State>("nine");//, enter, exit);
 
 
 		//Adding states.
@@ -69,6 +77,9 @@ using namespace DecisionMaking;
 		game.AddState(eight);
 		game.AddState(nine);
 
+		auto oneToTwo = make_shared<Transition>(one, genericCondition);
+		one->AddTransition(oneToTwo);
+
 		/*
 		Another way to possibly add it is
 
@@ -79,6 +90,8 @@ using namespace DecisionMaking;
 		*/
 
 		game.SetCurrentState(one);
+
+		cout << game.CurrentState()->Name() << endl;
 
 		//game.AddTransition(condition, two);
 

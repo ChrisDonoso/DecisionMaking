@@ -7,6 +7,12 @@ namespace DecisionMaking
 	{
 	}
 
+	Transition::Transition(std::shared_ptr<State> targetState, std::shared_ptr<Condition> condition)
+	{
+		SetTarget(targetState);
+		SetCondition(condition);
+	}
+
 	std::shared_ptr<Condition> Transition::GetCondition()
 	{
 		return mCondition;

@@ -150,6 +150,7 @@
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="DecisionMaking.cpp" />
     <ClCompile Include="GenericAction.cpp" />
+    <ClCompile Include="GenericCondition.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Condition.h" />
     <ClInclude Include="DecisionMaking.h" />
     <ClInclude Include="GenericAction.h" />
+    <ClInclude Include="GenericCondition.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />

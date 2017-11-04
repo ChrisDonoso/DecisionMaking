@@ -31,7 +31,7 @@ namespace DecisionMaking
 
 	std::shared_ptr<State> StateMachine::CurrentState()
 	{
-		return std::shared_ptr<State>();
+		return mCurrentState;
 	}
 
 	void StateMachine::Initialize()

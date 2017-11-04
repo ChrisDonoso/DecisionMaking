@@ -10,6 +10,7 @@ namespace DecisionMaking
 	{
 	public:
 		Transition();
+		Transition(std::shared_ptr<State> targetState, std::shared_ptr<Condition> condition);
 
 		std::shared_ptr<Condition> GetCondition();
 		bool IsTriggered();

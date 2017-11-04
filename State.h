@@ -1,19 +1,21 @@
 #pragma once
 #include "pch.h"
-#include "Action.h"
-#include "Transition.h"
+//#include "Action.h"
+//#include "Transition.h"
 
 namespace DecisionMaking
 {
 	class Action;
+	class Transition;
 
 	class State
 	{
 	public:
 		const State();
+		const State(std::string name);
 		const State(std::string name, std::shared_ptr<Action> enter, std::shared_ptr<Action> exit);
 
-		void AddTransition();
+		void AddTransition(std::shared_ptr<Transition> transition);
 		void AddTransitions();
 		void Enter();
 		void Exit();

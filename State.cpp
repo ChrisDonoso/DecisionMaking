@@ -7,6 +7,11 @@ namespace DecisionMaking
 	{
 	}
 
+	State::State(std::string name)
+	{
+		SetName(name);
+	}
+
 
 	State::~State()
 	{
@@ -19,9 +24,11 @@ namespace DecisionMaking
 		mExit = exit;
 	}
 
-	void State::AddTransition()
+	void State::AddTransition(std::shared_ptr<Transition> transition)
 	{
-
+		//mTransitions.insert(transition);
+		//mStates.emplace(std::make_pair(state->Name(), state));
+		mTransitions.push_back(transition);
 	}
 
 	void State::AddTransitions()
