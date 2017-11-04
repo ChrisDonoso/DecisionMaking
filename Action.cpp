@@ -7,10 +7,10 @@ namespace DecisionMaking
 	{
 	}
 
-	void Action::operator()(const State& state)
+	/*void Action::operator()(const State& state)
 	{
 		(void)state;
-	}
+	}*/
 
 	//Action& Action::operator=(const State& state)
 	//{

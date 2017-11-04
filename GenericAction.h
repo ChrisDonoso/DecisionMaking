@@ -43,5 +43,7 @@ namespace DecisionMaking
 		/*{
 
 		}*/
+		private:
+			std::function<void(const State&)> mFunction;
 	};
 }

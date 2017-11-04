@@ -40,6 +40,11 @@ namespace DecisionMaking
 
 	void StateMachine::SetCurrentState(std::shared_ptr<State> state)
 	{
+		if (mCurrentState != nullptr)
+		{
+			mCurrentState->Exit();
+		}
+
 		mCurrentState = state;
 
 		mCurrentState->Enter();
