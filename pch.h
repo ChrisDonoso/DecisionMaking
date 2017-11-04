@@ -16,6 +16,7 @@
 #include <list>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 
 // TODO: reference additional headers your program requires here

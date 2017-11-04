@@ -14,7 +14,7 @@ namespace DecisionMaking
 	}
 
 
-	Condition::~Condition()
+	/*Condition::~Condition()
 	{
-	}
+	}*/
 }

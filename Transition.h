@@ -4,6 +4,8 @@
 
 namespace DecisionMaking
 {
+	class State;
+
 	class Transition
 	{
 	public:
@@ -12,14 +14,14 @@ namespace DecisionMaking
 		std::shared_ptr<Condition> GetCondition();
 		bool IsTriggered();
 		////Transition& operator=();
-		void SetCondition();
-		void SetTarget();
+		void SetCondition(std::shared_ptr<Condition> condition);
+		void SetTarget(std::shared_ptr<State> targetState);
 		std::shared_ptr<State> Target();
 
 		~Transition();
 		
 	private:
 		std::shared_ptr<Condition> mCondition;
-		//std::shared_ptr<State> mTarget;
+		std::shared_ptr<State> mTarget;
 	};
 }

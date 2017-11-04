@@ -7,6 +7,7 @@
 #include "StateMachine.h"
 #include "State.h"
 #include "Action.h"
+#include "GenericAction.h"
 
 using namespace std;
 using namespace DecisionMaking;
@@ -17,21 +18,44 @@ using namespace DecisionMaking;
 	/*DecisionMaking::DecisionMaking()
 	{
 	}*/
+
+	void Enter(const State& state)
+	{
+		cout << state.Name() << "::Enter()" << endl;
+	}
+
+	void Exit(const State& state)
+	{
+		cout << state.Name() << "::Exit()" << endl;
+	}
 	
 	int main()
 	{
 		StateMachine game;
 
+		auto enter = make_shared<GenericAction>(Enter);
+		auto exit = make_shared<GenericAction>(Exit);
+
+		/*auto enter = make_shared<GenericAction>([](const State& state)
+		{
+			cout << state.Name() << "::Enter()" << endl;
+		});
+
+		auto exit = make_shared<GenericAction>([](const State& state)
+		{
+			cout << state.Name() << "::Exit()" << endl;
+		});*/
+
 		//Creating states.
-		shared_ptr<State> one = make_shared<State>("one");
-		shared_ptr<State> two = make_shared<State>("two");
-		shared_ptr<State> three = make_shared<State>("three");
-		shared_ptr<State> four = make_shared<State>("four");
-		shared_ptr<State> five = make_shared<State>("five");
-		shared_ptr<State> six = make_shared<State>("six");
-		shared_ptr<State> seven = make_shared<State>("seven");
-		shared_ptr<State> eight = make_shared<State>("eight");
-		shared_ptr<State> nine = make_shared<State>("nine");
+		shared_ptr<State> one = make_shared<State>("one", enter, exit);
+		shared_ptr<State> two = make_shared<State>("two", enter, exit);
+		shared_ptr<State> three = make_shared<State>("three", enter, exit);
+		shared_ptr<State> four = make_shared<State>("four", enter, exit);
+		shared_ptr<State> five = make_shared<State>("five", enter, exit);
+		shared_ptr<State> six = make_shared<State>("six", enter, exit);
+		shared_ptr<State> seven = make_shared<State>("seven", enter, exit);
+		shared_ptr<State> eight = make_shared<State>("eight", enter, exit);
+		shared_ptr<State> nine = make_shared<State>("nine", enter, exit);
 
 
 		//Adding states.

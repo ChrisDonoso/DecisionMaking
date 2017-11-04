@@ -8,9 +8,9 @@ namespace DecisionMaking
 	public:
 		Condition();
 
-		bool operator()();
+		virtual bool operator()() = 0;
 		//Condition& operator=();
 
-		~Condition();
+		virtual ~Condition() = default;
 	};
 }

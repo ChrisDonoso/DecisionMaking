@@ -9,22 +9,28 @@ namespace DecisionMaking
 
 	std::shared_ptr<Condition> Transition::GetCondition()
 	{
-		return std::shared_ptr<Condition>();
+		return mCondition;
 	}
 
 	bool Transition::IsTriggered()
 	{
+		//return mCondition->operator();
 		return false;
 	}
 
-	void Transition::SetCondition()
+	void Transition::SetCondition(std::shared_ptr<Condition> condition)
 	{
-
+		mCondition = condition;
 	}
 
-	void Transition::SetTarget()
+	void Transition::SetTarget(std::shared_ptr<State> targetState)
 	{
+		mTarget = targetState;
+	}
 
+	std::shared_ptr<State> Transition::Target()
+	{
+		return mTarget;
 	}
 
 	//std::shared_ptr<State> Transition::Target()

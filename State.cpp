@@ -12,9 +12,11 @@ namespace DecisionMaking
 	{
 	}
 
-	State::State(std::string name)
+	State::State(std::string name, std::shared_ptr<Action> enter, std::shared_ptr<Action> exit)
 	{
 		SetName(name);
+		mEnter = enter;
+		mExit = exit;
 	}
 
 	void State::AddTransition()
@@ -34,19 +36,18 @@ namespace DecisionMaking
 	{
 	}
 
-	//std::shared_ptr<Action> State::GetEnter()
-	//{
-	//	return std::shared_ptr<Action>();
-	//}
-
-	//std::shared_ptr<Action> State::GetExit()
-	//{
-	//	return std::shared_ptr<Action>();
-	//}
-
-	const std::string & State::Name()
+	std::shared_ptr<Action> State::GetEnter()
 	{
-		// TODO: insert return statement here
+		return mEnter;
+	}
+
+	std::shared_ptr<Action> State::GetExit()
+	{
+		return mExit;
+	}
+
+	const std::string & State::Name() const
+	{
 		return mName;
 	}
 
@@ -63,10 +64,10 @@ namespace DecisionMaking
 		mName = name;
 	}
 
-	//const std::vector<std::shared_ptr<Transition>>& State::Transitions()
-	//{
-	//	// TODO: insert return statement here
-	//}
+	const std::vector<std::shared_ptr<Transition>>& State::Transitions()
+	{
+		return mTransitions;
+	}
 
 	std::shared_ptr<State> State::Update()
 	{
