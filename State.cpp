@@ -98,6 +98,31 @@ namespace DecisionMaking
 		mName = name;
 	}
 
+	void State::SetDescription(std::string description)
+	{
+		mDescription = description;
+	}
+
+	const std::string & State::Description() const
+	{
+		return mDescription;
+	}
+
+	void State::AddProperty(std::string key)
+	{
+		mPropertyBag.insert(key);
+	}
+
+	void State::RemoveProperty(std::string key)
+	{
+		mPropertyBag.erase(key);
+	}
+
+	bool State::GetProperty(std::string key)
+	{
+		return mPropertyBag.find(key) != mPropertyBag.end();
+	}
+
 	const std::vector<std::shared_ptr<Transition>>& State::Transitions()
 	{
 		return mTransitions;

@@ -36,6 +36,32 @@ namespace DecisionMaking
 
 	void StateMachine::Initialize()
 	{
+
+	}
+
+	/*void StateMachine::AddProperty(std::string propertyName, bool flag)
+	{
+		mPropertyBag.emplace(propertyName, flag);
+	}
+
+	bool StateMachine::GetProperty(std::string key)
+	{
+		return mPropertyBag[key];
+	}*/
+
+	void StateMachine::AddProperty(std::string key)
+	{
+		mPropertyBag.insert(key);
+	}
+
+	void StateMachine::RemoveProperty(std::string key)
+	{
+		mPropertyBag.erase(key);
+	}
+
+	bool StateMachine::GetProperty(std::string key)
+	{
+		return mPropertyBag.find(key) != mPropertyBag.end();
 	}
 
 	void StateMachine::SetCurrentState(std::shared_ptr<State> state)
@@ -58,6 +84,23 @@ namespace DecisionMaking
 
 	std::shared_ptr<State> StateMachine::Update()
 	{
+		/*assert(mCurrentState != nullptr);
+
+		auto targetState = State::Update();
+
+		if (targetState == nullptr)
+		{
+			targetState = mCurrentState->Update();
+
+			if (targetState != nullptr)
+			{
+				mCurrentState->Exit();
+				mCurrentState = targetState;
+				mCurrentState->Enter();
+			}
+		}
+
+		return targetState;*/
 		return mCurrentState->Update();
 		//return std::shared_ptr<State>();
 	}

@@ -27,6 +27,11 @@ namespace DecisionMaking
 		void SetEnter(std::shared_ptr<Action> enter);
 		void SetExit(std::shared_ptr<Action> exit);
 		void SetName(std::string name);
+		void SetDescription(std::string description);
+		const std::string& Description() const;
+		void AddProperty(std::string key);
+		void RemoveProperty(std::string key);
+		bool GetProperty(std::string key);
 		const std::vector<std::shared_ptr<Transition>>& Transitions();
 		std::shared_ptr<State> Update();
 
@@ -36,6 +41,10 @@ namespace DecisionMaking
 		std::shared_ptr<Action> mEnter;
 		std::shared_ptr<Action> mExit;
 		std::string mName;
+		std::string mDescription;
 		std::vector<std::shared_ptr<Transition>> mTransitions;
+		//std::unordered_set<std::
+		std::hash_set<std::string> mPropertyBag;
+		//std::map<std::string, bool> mPropertyBag;
 	};
 }

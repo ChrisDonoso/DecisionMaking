@@ -5,6 +5,8 @@
 
 #pragma once
 
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+
 #include <SDKDDKVer.h>
 
 #include <stdio.h>
@@ -18,6 +20,10 @@
 #include <iostream>
 #include <string>
 #include <functional>
-
+#include <hash_set>
+#include <hash_map>
+#include <unordered_set>
+#include <unordered_map>
+#include <assert.h>
 
 // TODO: reference additional headers your program requires here

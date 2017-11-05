@@ -51,12 +51,14 @@ using namespace DecisionMaking;
 
 		auto enter = make_shared<GenericAction>([](const State& state)
 		{
-			cout << state.Name() << "::Enter()" << endl;
+			//cout << state.Name() << "::Enter()" << endl;
+			cout << state.Description() << endl;
 		});
 
 		auto exit = make_shared<GenericAction>([](const State& state)
 		{
-			cout << state.Name() << "::Exit()" << endl;
+			//cout << state.Name() << "::Exit()" << endl;
+			cout << state.Description() << endl;
 		});
 
 		/*auto genericCondition = make_shared<GenericCondition>([]()
@@ -70,16 +72,37 @@ using namespace DecisionMaking;
 		});*/
 
 		//Creating states.
-		shared_ptr<State> one = make_shared<State>("one", enter, exit);
-		shared_ptr<State> two = make_shared<State>("two", enter, exit);
-		shared_ptr<State> three = make_shared<State>("three", enter, exit);
-		shared_ptr<State> four = make_shared<State>("four", enter, exit);
-		shared_ptr<State> five = make_shared<State>("five", enter, exit);
-		shared_ptr<State> six = make_shared<State>("six", enter, exit);
-		shared_ptr<State> seven = make_shared<State>("seven", enter, exit);
-		shared_ptr<State> eight = make_shared<State>("eight", enter, exit);
-		shared_ptr<State> nine = make_shared<State>("nine", enter, exit);
+		shared_ptr<State> one = make_shared<State>("Foyer", enter, exit); //one
+		shared_ptr<State> two = make_shared<State>("DiningHall", enter, exit); //two
+		shared_ptr<State> three = make_shared<State>("Torture Chamber", enter, exit); //three
+		shared_ptr<State> four = make_shared<State>("Barracks", enter, exit); //four
+		shared_ptr<State> five = make_shared<State>("Garden", enter, exit); //five 
+		shared_ptr<State> six = make_shared<State>("Workshop", enter, exit); //six
+		shared_ptr<State> seven = make_shared<State>("Library", enter, exit); //seven
+		shared_ptr<State> eight = make_shared<State>("Laboratory", enter, exit); //eight
+		shared_ptr<State> nine = make_shared<State>("Catacombs", enter, exit); //nine
 
+		//Add descriptions for the states.
+		one->SetDescription("You wake up in an unknown location, slightly dazed and confused. You look around you and you appear to be in the entry\nroom of a 12th century Gothic castle, "
+			"the walls garnished with red drapes, the cielings with broken chandeliers, and\nbroken statues encompassing the room. "
+			"The castle has a damp and cold feeling, as if it has not been inhabited for\nawhile. You notice a some big wooden doors to the South.");
+		two->SetDescription("As you enter the room, the doors behind you slam shut. You try to open them, but have no luck. You notice a long wooden\ntable in the center "
+			"of the room, with a chandeliers hanging above, and ripped flags hanging on the cobblestone walls.\nThere is a big eerire painting of a girl crying hanging on the center of the "
+			"wall on the right side of the room. You\nnotice a door to the South.");
+		three->SetDescription("You enter a small room with no windows. In the middle of the room you find an odd looking contraption that almost looks\nlike a coffin. You smell something "
+			"wretched coming from it, and open it. Upon opening it, you notice sharp metal spikes\nhanging from the cover, and lying in the contraption is a skeleton. You quickly close it and look for an exit. "
+			"You\nnotice doors to the North, South, and West sides of the room.");
+		four->SetDescription("You enter a small room, and in the middle you notice a forge, and in one of the corners you notice a furnace with an\nanvil next to it. Hanging on the walls are racks littered with "
+			"broken weapons. You notice doors to the North, East, and\nSouth.");
+		five->SetDescription("You open the locked door with your key, and have found a secret passage that leads to the garden outside. You have\nfound freedom and are happy that you got out of there alive!");
+		six->SetDescription("You enter a room with a workbench in the middle of it. There are nails scattered on the floors and tools scattered\naccross the workbench. You notice doors to the North and East.");
+		seven->SetDescription("You enter a very large room with bookshelves as high as the ceiling lining the walls. You look up and notice a mural\npainted on the ceiling. The mural seems dull and worn out, but "
+			"You can tell that it must have been majestic when it was\npainted. You notice doors to the East and West.");
+		eight->SetDescription("You enter a room with vials and tubes spread out on a table. There are papers with diagrams and formulas spread\nthroughout the entire room on the floors and walls. This "
+			"appears to be a lab of some sort. You notice doors to the East and West.");
+		nine->SetDescription("You enter a very dark room. The air feels damp and cold, and you reach your hands out to try and find a wall to walk\nalong. You feel something cold with an odd texture. "
+			"Your eyes adjust, and you notice that the walls are lined with\nbones and skulls. Your heart sinks, and the hair on the back of your neck rises. You quickly look for an exit, and \nnotice "
+			"that the only exit is the way you came, from the East.");
 
 		//Adding states.
 		game.AddState(one);
@@ -164,14 +187,24 @@ using namespace DecisionMaking;
 		eight->AddTransition(eightToNine);
 		nine->AddTransition(nineToEight);
 
+		seven->AddProperty("key");//, true);
+		//seven->RemoveProperty("key");
+
+		//cout << seven->GetProperty("key") << endl;
+
 		//cout << one->Transitions().size() << endl;
 
 		shared_ptr<State> temp = make_shared<State>();
 
 		while (game.CurrentState() != five)// && (game.CurrentState() != AI.CurrentState()))
 		{
+			//cout << game.CurrentState()->Description() << endl;
+
 			cout << ">";
 			cin >> *command;
+
+			//strcpy((char*)&command, (char*)tolower(&command));
+			//command = tolower(command);
 
 			//cout << "Current state: " << game.CurrentState()->Name() << endl;
 
@@ -275,7 +308,7 @@ using namespace DecisionMaking;
 
 		if (*command != "exit" && game.CurrentState() == five)
 		{
-			cout << "You have found the exit and escaped the monster!" << endl;
+			cout << game.CurrentState()->Description() << endl;
 		}
 		/*else if (game.CurrentState() == AI.CurrentState())
 		{
