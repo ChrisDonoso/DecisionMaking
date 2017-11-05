@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Transition.h"
+#include "Condition.h"
 
 namespace DecisionMaking
 {
@@ -20,8 +21,9 @@ namespace DecisionMaking
 
 	bool Transition::IsTriggered()
 	{
+		return  (*mCondition)(); // (*this);
 		//return mCondition->operator();
-		return false;
+		//return false;
 	}
 
 	void Transition::SetCondition(std::shared_ptr<Condition> condition)

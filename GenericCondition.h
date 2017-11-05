@@ -4,29 +4,32 @@
 
 namespace DecisionMaking
 {
-	template<typename T>
 	class GenericCondition : public Condition
 	{
 	public:
-		GenericCondition()
-		{
+		GenericCondition();
+		/*{
 
-		}
+		}*/
 
-		GenericCondition(T&& lambda)
-		{
+		//GenericCondition::GenericCondition(std::function<void(const State&)> function);
 
-		}//std::shared_ptr<GenericCondition>)//);
+		//GenericCondition(T&& lambda)
+		//{
 
-		virtual bool operator()() override
-		{
+		//}//std::shared_ptr<GenericCondition>)//);
 
-		}
-		//GenericCondition& operator=(const GenericCondition& rhs) = default;
+		virtual bool operator()() override; // const Transition& transition) override; // const State& state) override;
+		/*{
 
-		~GenericCondition()
-		{
+		}*/
+		GenericCondition& operator=(const GenericCondition& rhs) = default;
 
-		}
+		~GenericCondition();
+		/*{
+
+		}*/
+	private:
+		//std::function<void(const State&)> mFunction;
 	};
 }

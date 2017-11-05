@@ -8,10 +8,10 @@ namespace DecisionMaking
 	{
 	}
 
-	bool Condition::operator()()
+	/*bool Condition::operator()()
 	{
 		return false;
-	}
+	}*/
 
 
 	/*Condition::~Condition()

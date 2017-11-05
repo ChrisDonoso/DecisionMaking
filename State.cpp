@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "State.h"
 #include "Action.h"
+#include "Transition.h"
 
 namespace DecisionMaking
 {
@@ -40,6 +41,7 @@ namespace DecisionMaking
 
 	void State::AddTransitions()
 	{
+
 	}
 
 	void State::Enter()
@@ -103,6 +105,14 @@ namespace DecisionMaking
 
 	std::shared_ptr<State> State::Update()
 	{
-		return std::shared_ptr<State>();
+		for (const auto& transition : mTransitions)
+		{
+			if (transition->IsTriggered())
+			{
+				return transition->Target();
+			}
+		}
+
+		return nullptr;
 	}
 }

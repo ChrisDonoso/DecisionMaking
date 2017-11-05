@@ -10,6 +10,7 @@
 #include "GenericAction.h"
 #include "Condition.h"
 #include "GenericCondition.h"
+#include "EqualsCondition.h"	
 #include "Transition.h"
 
 using namespace std;
@@ -56,6 +57,11 @@ using namespace DecisionMaking;
 
 		/*auto genericCondition = make_shared<GenericCondition>([]()
 		{
+			
+		});*/
+
+		/*auto genericCondition = make_shared<GenericCondition>([]()
+		{
 		
 		});*/
 
@@ -95,12 +101,69 @@ using namespace DecisionMaking;
 		*/
 
 		game.SetCurrentState(one);
-		game.SetCurrentState(two);
+		//game.SetCurrentState(two);
+
+		shared_ptr<string> command = make_shared<string>();
+		string command2;
+
+		//cin >> *command;
+
+		shared_ptr<EqualsCondition> northMovement = make_shared<EqualsCondition>("north", command);
+		shared_ptr<EqualsCondition> eastMovement = make_shared<EqualsCondition>("east", command);
+		shared_ptr<EqualsCondition> southMovement = make_shared<EqualsCondition>("south", command);
+		shared_ptr<EqualsCondition> westMovement = make_shared<EqualsCondition>("west", command);
+
+		auto oneToTwo = make_shared<Transition>(two, southMovement);
+		auto twoToThree = make_shared<Transition>(three, southMovement);
+		auto threeToTwo = make_shared<Transition>(two, northMovement);
+		auto threeToFour = make_shared<Transition>(four, westMovement);
+		auto threeToSeven = make_shared<Transition>(seven, southMovement);
+		auto fourToThree = make_shared<Transition>(three, eastMovement);
+		auto fourToFive = make_shared<Transition>(five, northMovement);
+		auto fourToSix = make_shared<Transition>(six, southMovement);
+		auto sixToFour = make_shared<Transition>(four, northMovement);
+		auto sixToSeven = make_shared<Transition>(seven, eastMovement);
+		auto sevenToEight = make_shared<Transition>(eight, eastMovement);
+		auto sevenToSix = make_shared<Transition>(six, westMovement);
+		auto eightToSeven = make_shared<Transition>(seven, westMovement);
+		auto eightToNine = make_shared<Transition>(nine, eastMovement);
+		auto nineToEight = make_shared<Transition>(eight, westMovement);
+
+		one->AddTransition(oneToTwo);
+		two->AddTransition(twoToThree);
+		three->AddTransition(threeToTwo);
+		three->AddTransition(threeToFour);
+		three->AddTransition(threeToSeven);
+		four->AddTransition(fourToThree);
+		four->AddTransition(fourToFive);
+		four->AddTransition(fourToSix);
+		six->AddTransition(sixToFour);
+		six->AddTransition(sixToSeven);
+		seven->AddTransition(sevenToEight);
+		seven->AddTransition(sevenToSix);
+		eight->AddTransition(eightToSeven);
+		eight->AddTransition(eightToNine);
+		nine->AddTransition(nineToEight);
+
+		//cout << one->Transitions().size() << endl;
+
+		shared_ptr<State> temp = make_shared<State>();
 
 		while (game.CurrentState() != five)
 		{
-			
+			cout << ">";
+			cin >> *command;
+
+			temp = game.CurrentState()->Update();
+
+			if (temp != nullptr)
+			{
+				game.SetCurrentState(temp);
+			}
+			//game.CurrentState()->Update();
 		}
+
+		cout << "You have found the exit and escaped the monster!" << endl;
 
 		//cout << game.CurrentState()->Name() << endl;
 

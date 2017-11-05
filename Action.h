@@ -11,7 +11,7 @@ namespace DecisionMaking
 		Action();
 
 		virtual void operator()(const State& state) = 0;
-		//Action& operator=(const State& state);// = default;
+		//Action& operator=(const State& state) = default;
 
 		virtual ~Action() = default;
 		

@@ -149,6 +149,7 @@
     <ClCompile Include="ActionList.cpp" />
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="DecisionMaking.cpp" />
+    <ClCompile Include="EqualsCondition.cpp" />
     <ClCompile Include="GenericAction.cpp" />
     <ClCompile Include="GenericCondition.cpp" />
     <ClCompile Include="pch.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="ActionList.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="DecisionMaking.h" />
+    <ClInclude Include="EqualsCondition.h" />
     <ClInclude Include="GenericAction.h" />
     <ClInclude Include="GenericCondition.h" />
     <ClInclude Include="pch.h" />
