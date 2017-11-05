@@ -60,6 +60,14 @@ namespace DecisionMaking
 		}
 	}
 
+	void State::Inspect()
+	{
+		if (mInspect != nullptr)
+		{
+			(*mInspect)(*this);
+		}
+	}
+
 	std::shared_ptr<Action> State::GetEnter()
 	{
 		return mEnter;
@@ -68,6 +76,11 @@ namespace DecisionMaking
 	std::shared_ptr<Action> State::GetExit()
 	{
 		return mExit;
+	}
+
+	std::shared_ptr<Action> State::GetInspect()
+	{
+		return mInspect;
 	}
 
 	const std::string & State::Name() const
@@ -93,6 +106,11 @@ namespace DecisionMaking
 		mExit = exit;
 	}
 
+	void State::SetInspect(std::shared_ptr<Action> inspect)
+	{
+		mInspect = inspect;
+	}
+
 	void State::SetName(std::string name)
 	{
 		mName = name;
@@ -106,6 +124,26 @@ namespace DecisionMaking
 	const std::string & State::Description() const
 	{
 		return mDescription;
+	}
+
+	void State::SetInspectionDescription(std::string inspection)
+	{
+		mInspectDescription = inspection;
+	}
+
+	const std::string & State::InspectionDescription() const
+	{
+		return mInspectDescription;
+	}
+
+	void State::SetFirstTimeEntered(bool flag)
+	{
+		mFirstTimeEntered = flag;
+	}
+
+	const bool& State::FirstTimeEntered() const
+	{
+		return mFirstTimeEntered;
 	}
 
 	void State::AddProperty(std::string key)

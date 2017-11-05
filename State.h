@@ -20,15 +20,22 @@ namespace DecisionMaking
 		void AddTransitions();
 		void Enter();
 		void Exit();
+		void Inspect();
 		std::shared_ptr<Action> GetEnter();
 		std::shared_ptr<Action> GetExit();
+		std::shared_ptr<Action> GetInspect();
 		const std::string& Name() const;
 		//State& operator=(const State& state);
 		void SetEnter(std::shared_ptr<Action> enter);
 		void SetExit(std::shared_ptr<Action> exit);
+		void SetInspect(std::shared_ptr<Action> inspect);
 		void SetName(std::string name);
 		void SetDescription(std::string description);
 		const std::string& Description() const;
+		void SetInspectionDescription(std::string inspection);
+		const std::string& InspectionDescription() const;
+		void SetFirstTimeEntered(bool flag);
+		const bool& FirstTimeEntered() const;
 		void AddProperty(std::string key);
 		void RemoveProperty(std::string key);
 		bool GetProperty(std::string key);
@@ -40,11 +47,14 @@ namespace DecisionMaking
 	private:
 		std::shared_ptr<Action> mEnter;
 		std::shared_ptr<Action> mExit;
+		std::shared_ptr<Action> mInspect;
 		std::string mName;
 		std::string mDescription;
+		std::string mInspectDescription;
 		std::vector<std::shared_ptr<Transition>> mTransitions;
 		//std::unordered_set<std::
 		std::hash_set<std::string> mPropertyBag;
+		bool mFirstTimeEntered;
 		//std::map<std::string, bool> mPropertyBag;
 	};
 }

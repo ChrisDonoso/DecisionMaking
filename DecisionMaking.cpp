@@ -51,14 +51,33 @@ using namespace DecisionMaking;
 
 		auto enter = make_shared<GenericAction>([](const State& state)
 		{
+			if (state.FirstTimeEntered())
+			{
+				cout << state.Description() << endl;
+			}
+			else
+			{
+				cout << "You have entered the " << state.Name() << "." << endl;
+			}
 			//cout << state.Name() << "::Enter()" << endl;
-			cout << state.Description() << endl;
+
+			//state.SetDescription("asdas");
+			//cout << state.Description() << endl;
 		});
 
 		auto exit = make_shared<GenericAction>([](const State& state)
 		{
+			(void)state;
 			//cout << state.Name() << "::Exit()" << endl;
-			cout << state.Description() << endl;
+			//cout << state.Description() << endl;
+		});
+
+		auto inspect = make_shared<GenericAction>([](const State& state)
+		{
+			//(void)state;
+			cout << state.InspectionDescription() << endl;
+			//cout << state.Name() << "::Exit()" << endl;
+			//cout << state.Description() << endl;
 		});
 
 		/*auto genericCondition = make_shared<GenericCondition>([]()
@@ -73,7 +92,7 @@ using namespace DecisionMaking;
 
 		//Creating states.
 		shared_ptr<State> one = make_shared<State>("Foyer", enter, exit); //one
-		shared_ptr<State> two = make_shared<State>("DiningHall", enter, exit); //two
+		shared_ptr<State> two = make_shared<State>("Dining Hall", enter, exit); //two
 		shared_ptr<State> three = make_shared<State>("Torture Chamber", enter, exit); //three
 		shared_ptr<State> four = make_shared<State>("Barracks", enter, exit); //four
 		shared_ptr<State> five = make_shared<State>("Garden", enter, exit); //five 
@@ -81,6 +100,26 @@ using namespace DecisionMaking;
 		shared_ptr<State> seven = make_shared<State>("Library", enter, exit); //seven
 		shared_ptr<State> eight = make_shared<State>("Laboratory", enter, exit); //eight
 		shared_ptr<State> nine = make_shared<State>("Catacombs", enter, exit); //nine
+
+		shared_ptr<State> twoMonster = make_shared<State>("Dining Hall");
+		shared_ptr<State> threeMonster = make_shared<State>("Torture Chamber");
+		shared_ptr<State> fourMonster = make_shared<State>("Barracks");
+		shared_ptr<State> sixMonster = make_shared<State>("Workshop");
+		shared_ptr<State> sevenMonster = make_shared<State>("Library");
+		shared_ptr<State> eightMonster = make_shared<State>("Laboratory");
+		shared_ptr<State> nineMonster = make_shared<State>("Catacombs");
+
+		game.SetInspect(inspect);
+
+		one->SetInspect(inspect);
+		two->SetInspect(inspect);
+		three->SetInspect(inspect);
+		four->SetInspect(inspect);
+		five->SetInspect(inspect);
+		six->SetInspect(inspect);
+		seven->SetInspect(inspect);
+		eight->SetInspect(inspect);
+		nine->SetInspect(inspect);
 
 		//Add descriptions for the states.
 		one->SetDescription("You wake up in an unknown location, slightly dazed and confused. You look around you and you appear to be in the entry\nroom of a 12th century Gothic castle, "
@@ -104,6 +143,15 @@ using namespace DecisionMaking;
 			"Your eyes adjust, and you notice that the walls are lined with\nbones and skulls. Your heart sinks, and the hair on the back of your neck rises. You quickly look for an exit, and \nnotice "
 			"that the only exit is the way you came, from the East.");
 
+		one->SetInspectionDescription("You find nothing.");
+		two->SetInspectionDescription("You inspect the painting further, and it no longer appears to be crying, but smiling.");
+		three->SetInspectionDescription("You notice a few of the strange contraption's spike on the ground.");
+		four->SetInspectionDescription("You further inspect the weapon rack to look for a working weapon, but have no luck.");
+		six->SetInspectionDescription("You find nothing.");
+		seven->SetInspectionDescription("You notice a book sticking out of one of the shelves, and open it. You find a key inside! *Plays Legend of Zelda chest\nopening music.*");
+		eight->SetInspectionDescription("You notice a weird circular pattern on the ground, and walk inside of it. All of a sudden your body feels light, and\nyou find yourself in a different room.");
+		nine->SetInspectionDescription("Among all of the bones on the ground, in the center of the room you see what appears to be a fresh mutilated corpse.");
+
 		//Adding states.
 		game.AddState(one);
 		game.AddState(two);
@@ -116,7 +164,7 @@ using namespace DecisionMaking;
 		game.AddState(nine);
 
 		//Adding states for AI.
-		AI.AddState(one);
+		/*AI.AddState(one);
 		AI.AddState(two);
 		AI.AddState(three);
 		AI.AddState(four);
@@ -124,7 +172,15 @@ using namespace DecisionMaking;
 		AI.AddState(six);
 		AI.AddState(seven);
 		AI.AddState(eight);
-		AI.AddState(nine);
+		AI.AddState(nine);*/
+
+		AI.AddState(twoMonster);
+		AI.AddState(threeMonster);
+		AI.AddState(fourMonster);
+		AI.AddState(sixMonster);
+		AI.AddState(sevenMonster);
+		AI.AddState(eightMonster);
+		AI.AddState(nineMonster);
 
 		//auto oneToTwo = make_shared<Transition>(one, genericCondition);
 		//one->AddTransition(oneToTwo);
@@ -139,7 +195,7 @@ using namespace DecisionMaking;
 		*/
 
 		game.SetCurrentState(one);
-		AI.SetCurrentState(nine);
+		AI.SetCurrentState(nineMonster);
 		//game.SetCurrentState(two);
 
 		shared_ptr<string> command = make_shared<string>();
@@ -151,6 +207,7 @@ using namespace DecisionMaking;
 		shared_ptr<EqualsCondition> eastMovement = make_shared<EqualsCondition>("east", command);
 		shared_ptr<EqualsCondition> southMovement = make_shared<EqualsCondition>("south", command);
 		shared_ptr<EqualsCondition> westMovement = make_shared<EqualsCondition>("west", command);
+		//shared_ptr<EqualsCondition> inspectCondition = make_shared<EqualsCondition>("inspect", command);
 		//shared_ptr<EqualsCondition> exitCommand = make_shared<EqualsCondition>("exit", command);
 
 		auto oneToTwo = make_shared<Transition>(two, southMovement);
@@ -199,6 +256,9 @@ using namespace DecisionMaking;
 		while (game.CurrentState() != five)// && (game.CurrentState() != AI.CurrentState()))
 		{
 			//cout << game.CurrentState()->Description() << endl;
+			temp = nullptr;
+
+			game.CurrentState()->SetFirstTimeEntered(false);
 
 			cout << ">";
 			cin >> *command;
@@ -213,16 +273,97 @@ using namespace DecisionMaking;
 				break;
 			}
 
-			temp = game.Update();
+			if (*command == "inspect")
+			{
+				game.SetInspecting(true);
+
+				if (game.CurrentState() == seven)
+				{
+					game.AddProperty("key");
+					game.CurrentState()->RemoveProperty("key");
+				}
+				//else if (game.CurrentState() == eight)
+				//{
+				//	temp = four;
+				//	//game.SetCurrentState(four);
+				//}
+
+				//game.SetInspecting(true);
+			}
+			else
+			{
+				game.SetInspecting(false);
+			}
+
+			if (*command == "north" && game.CurrentState() == four)
+			{
+				if (game.GetProperty("key"))
+				{
+					temp = game.Update();
+				}
+				else
+				{
+					cout << "The door appears to be locked." << endl;
+				}
+			}
+			else
+			{	
+				if (game.CurrentState() == eight && game.Inspecting())
+				{
+					temp = game.Update();
+					temp = four;
+				}
+				else
+				{
+					temp = game.Update();
+				}
+			}
+
+			/*if (game.CurrentState() == four && game.GetProperty("key") && *command == "north")
+			{
+				temp = game.Update();
+			}
+			else
+			{
+				temp = game.Update();
+			}*/
 
 			// AI Controller
 			if (chase)
 			{
-				AI.SetCurrentState(game.CurrentState());
+				if (game.CurrentState() == two)
+				{
+					AI.SetCurrentState(twoMonster);
+				}
+				else if (game.CurrentState() == three)
+				{
+					AI.SetCurrentState(threeMonster);
+				}
+				else if (game.CurrentState() == four)
+				{
+					AI.SetCurrentState(fourMonster);
+				}
+				else if (game.CurrentState() == six)
+				{
+					AI.SetCurrentState(sixMonster);
+				}
+				else if (game.CurrentState() == seven)
+				{
+					AI.SetCurrentState(sevenMonster);
+				}
+				else if (game.CurrentState() == eight)
+				{
+					AI.SetCurrentState(eightMonster);
+				}
+				else if (game.CurrentState() == nine)
+				{
+					AI.SetCurrentState(nineMonster);
+				}
+				//AI.SetCurrentState(game.CurrentState());
 			}
 			else
 			{
-				if (AI.CurrentState() == nine)
+				if (AI.CurrentState() == nineMonster)
 				{
 					backtrack = 0;
 
@@ -231,9 +372,9 @@ using namespace DecisionMaking;
 						chase = 1;
 					}
 
-					AI.SetCurrentState(eight);
+					AI.SetCurrentState(eightMonster);
 				}
-				else if (AI.CurrentState() == eight)
+				else if (AI.CurrentState() == eightMonster)
 				{
 					if (game.CurrentState() == nine || game.CurrentState() == seven)
 					{
@@ -242,14 +383,14 @@ using namespace DecisionMaking;
 
 					if (backtrack)
 					{
-						AI.SetCurrentState(nine);
+						AI.SetCurrentState(nineMonster);
 					}
 					else
 					{
-						AI.SetCurrentState(seven);
+						AI.SetCurrentState(sevenMonster);
 					}
 				}
-				else if (AI.CurrentState() == seven)
+				else if (AI.CurrentState() == sevenMonster)
 				{
 					if (game.CurrentState() == eight || game.CurrentState() == six)
 					{
@@ -258,32 +399,32 @@ using namespace DecisionMaking;
 
 					if (backtrack)
 					{
-						AI.SetCurrentState(eight);
+						AI.SetCurrentState(eightMonster);
 					}
 					else
 					{
-						AI.SetCurrentState(six);
+						AI.SetCurrentState(sixMonster);
 					}
 				}
-				else if (AI.CurrentState() == six)
+				else if (AI.CurrentState() == sixMonster)
 				{
 					if (game.CurrentState() == seven || game.CurrentState() == four)
 					{
 						chase = 1;
 					}
 
-					AI.SetCurrentState(four);
+					AI.SetCurrentState(fourMonster);
 				}
-				else if (AI.CurrentState() == four)
+				else if (AI.CurrentState() == fourMonster)
 				{
 					if (game.CurrentState() == six || game.CurrentState() == three)
 					{
 						chase = 1;
 					}
 
-					AI.SetCurrentState(three);
+					AI.SetCurrentState(threeMonster);
 				}
-				else if (AI.CurrentState() == three)
+				else if (AI.CurrentState() == threeMonster)
 				{
 					if (game.CurrentState() == four || game.CurrentState() == seven || game.CurrentState() == two)
 					{
@@ -291,7 +432,7 @@ using namespace DecisionMaking;
 					}
 
 					backtrack = 1;
-					AI.SetCurrentState(seven);
+					AI.SetCurrentState(sevenMonster);
 				}
 			}
 
@@ -306,10 +447,11 @@ using namespace DecisionMaking;
 			}
 		}
 
-		if (*command != "exit" && game.CurrentState() == five)
+		/*if (*command != "exit" && game.CurrentState() == five)
 		{
 			cout << game.CurrentState()->Description() << endl;
-		}
+		}*/
+
 		/*else if (game.CurrentState() == AI.CurrentState())
 		{
 			cout << "The monster has eaten you and you have died." << endl;

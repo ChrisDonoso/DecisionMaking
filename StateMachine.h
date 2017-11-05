@@ -20,6 +20,8 @@ namespace DecisionMaking
 		void RemoveProperty(std::string key);
 		bool GetProperty(std::string);
 		void SetCurrentState(std::shared_ptr<State> state);
+		void SetInspecting(bool flag);
+		bool Inspecting();
 		const std::map<std::string, std::shared_ptr<State>>& States();
 		std::shared_ptr<State> Update();
 
@@ -29,6 +31,8 @@ namespace DecisionMaking
 		std::shared_ptr<State> mCurrentState;
 		std::map<std::string, std::shared_ptr<State>> mStates;
 		std::hash_set<std::string> mPropertyBag;
+		//bool mFirstTimeEntered;
+		bool mInspecting;
 		//std::map<std::string, bool> mPropertyBag;
 	};
 }

@@ -76,6 +76,16 @@ namespace DecisionMaking
 		mCurrentState->Enter();
 	}
 
+	void StateMachine::SetInspecting(bool flag)
+	{
+		mInspecting = flag;
+	}
+
+	bool StateMachine::Inspecting()
+	{
+		return mInspecting;
+	}
+
 	const std::map<std::string, std::shared_ptr<State>>& StateMachine::States()
 	{
 		// TODO: insert return statement here
@@ -101,6 +111,11 @@ namespace DecisionMaking
 		}
 
 		return targetState;*/
+		if (mInspecting)
+		{
+			mCurrentState->Inspect();
+		}
+
 		return mCurrentState->Update();
 		//return std::shared_ptr<State>();
 	}
