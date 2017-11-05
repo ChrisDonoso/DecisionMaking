@@ -36,6 +36,10 @@ using namespace DecisionMaking;
 	int main()
 	{
 		StateMachine game;
+		StateMachine AI;
+
+		bool chase = 0;
+		bool backtrack = 0;
 
 		/*auto enter = make_shared<GenericAction>(Enter);
 		auto exit = make_shared<GenericAction>(Exit);*/
@@ -88,6 +92,17 @@ using namespace DecisionMaking;
 		game.AddState(eight);
 		game.AddState(nine);
 
+		//Adding states for AI.
+		AI.AddState(one);
+		AI.AddState(two);
+		AI.AddState(three);
+		AI.AddState(four);
+		AI.AddState(five);
+		AI.AddState(six);
+		AI.AddState(seven);
+		AI.AddState(eight);
+		AI.AddState(nine);
+
 		//auto oneToTwo = make_shared<Transition>(one, genericCondition);
 		//one->AddTransition(oneToTwo);
 
@@ -101,6 +116,7 @@ using namespace DecisionMaking;
 		*/
 
 		game.SetCurrentState(one);
+		AI.SetCurrentState(nine);
 		//game.SetCurrentState(two);
 
 		shared_ptr<string> command = make_shared<string>();
@@ -112,6 +128,7 @@ using namespace DecisionMaking;
 		shared_ptr<EqualsCondition> eastMovement = make_shared<EqualsCondition>("east", command);
 		shared_ptr<EqualsCondition> southMovement = make_shared<EqualsCondition>("south", command);
 		shared_ptr<EqualsCondition> westMovement = make_shared<EqualsCondition>("west", command);
+		//shared_ptr<EqualsCondition> exitCommand = make_shared<EqualsCondition>("exit", command);
 
 		auto oneToTwo = make_shared<Transition>(two, southMovement);
 		auto twoToThree = make_shared<Transition>(three, southMovement);
@@ -128,6 +145,8 @@ using namespace DecisionMaking;
 		auto eightToSeven = make_shared<Transition>(seven, westMovement);
 		auto eightToNine = make_shared<Transition>(nine, eastMovement);
 		auto nineToEight = make_shared<Transition>(eight, westMovement);
+		/*auto exit = make_shared<Transition>(exitCommand);
+		game.AddTransition(exit);*/
 
 		one->AddTransition(oneToTwo);
 		two->AddTransition(twoToThree);
@@ -149,21 +168,119 @@ using namespace DecisionMaking;
 
 		shared_ptr<State> temp = make_shared<State>();
 
-		while (game.CurrentState() != five)
+		while (game.CurrentState() != five)// && (game.CurrentState() != AI.CurrentState()))
 		{
 			cout << ">";
 			cin >> *command;
 
-			temp = game.CurrentState()->Update();
+			//cout << "Current state: " << game.CurrentState()->Name() << endl;
+
+			if (*command == "exit")
+			{
+				break;
+			}
+
+			temp = game.Update();
+
+			// AI Controller
+			if (chase)
+			{
+				AI.SetCurrentState(game.CurrentState());
+			}
+			else
+			{
+				if (AI.CurrentState() == nine)
+				{
+					backtrack = 0;
+
+					if (game.CurrentState() == eight)
+					{
+						chase = 1;
+					}
+
+					AI.SetCurrentState(eight);
+				}
+				else if (AI.CurrentState() == eight)
+				{
+					if (game.CurrentState() == nine || game.CurrentState() == seven)
+					{
+						chase = 1;
+					}
+
+					if (backtrack)
+					{
+						AI.SetCurrentState(nine);
+					}
+					else
+					{
+						AI.SetCurrentState(seven);
+					}
+				}
+				else if (AI.CurrentState() == seven)
+				{
+					if (game.CurrentState() == eight || game.CurrentState() == six)
+					{
+						chase = 1;
+					}
+
+					if (backtrack)
+					{
+						AI.SetCurrentState(eight);
+					}
+					else
+					{
+						AI.SetCurrentState(six);
+					}
+				}
+				else if (AI.CurrentState() == six)
+				{
+					if (game.CurrentState() == seven || game.CurrentState() == four)
+					{
+						chase = 1;
+					}
+
+					AI.SetCurrentState(four);
+				}
+				else if (AI.CurrentState() == four)
+				{
+					if (game.CurrentState() == six || game.CurrentState() == three)
+					{
+						chase = 1;
+					}
+
+					AI.SetCurrentState(three);
+				}
+				else if (AI.CurrentState() == three)
+				{
+					if (game.CurrentState() == four || game.CurrentState() == seven || game.CurrentState() == two)
+					{
+						chase = 1;
+					}
+
+					backtrack = 1;
+					AI.SetCurrentState(seven);
+				}
+			}
+
+			if (chase)
+			{
+				cout << "THE MONSTER IS CHASING YOU! RUN!!!" << endl;
+			}
 
 			if (temp != nullptr)
 			{
 				game.SetCurrentState(temp);
 			}
-			//game.CurrentState()->Update();
 		}
 
-		cout << "You have found the exit and escaped the monster!" << endl;
+		if (*command != "exit" && game.CurrentState() == five)
+		{
+			cout << "You have found the exit and escaped the monster!" << endl;
+		}
+		/*else if (game.CurrentState() == AI.CurrentState())
+		{
+			cout << "The monster has eaten you and you have died." << endl;
+		}*/
 
 		//cout << game.CurrentState()->Name() << endl;
 

@@ -58,7 +58,8 @@ namespace DecisionMaking
 
 	std::shared_ptr<State> StateMachine::Update()
 	{
-		return std::shared_ptr<State>();
+		return mCurrentState->Update();
+		//return std::shared_ptr<State>();
 	}
 
 
