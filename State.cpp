@@ -68,6 +68,14 @@ namespace DecisionMaking
 		}
 	}
 
+	void State::Hide()
+	{
+		if (mHide != nullptr)
+		{
+			(*mHide)();
+		}
+	}
+
 	std::shared_ptr<Action> State::GetEnter()
 	{
 		return mEnter;
@@ -81,6 +89,11 @@ namespace DecisionMaking
 	std::shared_ptr<Action> State::GetInspect()
 	{
 		return mInspect;
+	}
+
+	std::shared_ptr<Action> State::GetHide()
+	{
+		return mHide;
 	}
 
 	const std::string & State::Name() const
@@ -109,6 +122,11 @@ namespace DecisionMaking
 	void State::SetInspect(std::shared_ptr<Action> inspect)
 	{
 		mInspect = inspect;
+	}
+
+	void State::SetHide(std::shared_ptr<Action> hide)
+	{
+		mHide = hide;
 	}
 
 	void State::SetName(std::string name)

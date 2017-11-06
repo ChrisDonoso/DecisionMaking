@@ -12,9 +12,19 @@ namespace DecisionMaking
 		mFunction = function;
 	}
 
+	GenericAction::GenericAction(std::function<void()> function)
+	{
+		mFunction2 = function;
+	}
+
 	void GenericAction::operator()(const State& state)
 	{
 		mFunction(state);
+	}
+
+	void GenericAction::operator()()
+	{
+		mFunction2();
 	}
 
 	//GenericAction & GenericAction::operator=(const GenericAction & rhs)

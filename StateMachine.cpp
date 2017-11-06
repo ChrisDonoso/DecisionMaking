@@ -66,14 +66,14 @@ namespace DecisionMaking
 
 	void StateMachine::SetCurrentState(std::shared_ptr<State> state)
 	{
-		if (mCurrentState != nullptr)
+		/*if (mCurrentState != nullptr)
 		{
 			mCurrentState->Exit();
-		}
+		}*/
 
 		mCurrentState = state;
 
-		mCurrentState->Enter();
+		//mCurrentState->Enter();
 	}
 
 	void StateMachine::SetInspecting(bool flag)
@@ -86,6 +86,66 @@ namespace DecisionMaking
 		return mInspecting;
 	}
 
+	void StateMachine::SetChase(bool flag)
+	{
+		mChase = flag;
+	}
+
+	bool StateMachine::Chase()
+	{
+		return mChase;
+	}
+
+	void StateMachine::SetBacktrack(bool flag)
+	{
+		mBacktrack = flag;
+	}
+
+	bool StateMachine::Backtrack()
+	{
+		return mBacktrack;
+	}
+
+	void StateMachine::SetHideSuccessful(bool flag)
+	{
+		mHideSuccessful = flag;
+	}
+
+	bool StateMachine::HideSuccessful()
+	{
+		return mHideSuccessful;
+	}
+
+	void StateMachine::SetAttemptToHide(bool flag)
+	{
+		mAttemptToHide = flag;
+	}
+
+	bool StateMachine::AttemptingToHide()
+	{
+		return mAttemptToHide;
+	}
+
+	void StateMachine::SetDead(bool flag)
+	{
+		mDead = flag;
+	}
+
+	bool StateMachine::Dead()
+	{
+		return mDead;
+	}
+
+	void StateMachine::SetFirstEncounter(bool flag)
+	{
+		mFirstEncounter = flag;
+	}
+
+	bool StateMachine::FirstEncounter()
+	{
+		return mFirstEncounter;
+	}
+
 	const std::map<std::string, std::shared_ptr<State>>& StateMachine::States()
 	{
 		// TODO: insert return statement here
@@ -94,13 +154,23 @@ namespace DecisionMaking
 
 	std::shared_ptr<State> StateMachine::Update()
 	{
-		/*assert(mCurrentState != nullptr);
+		assert(mCurrentState != nullptr);
 
 		auto targetState = State::Update();
 
 		if (targetState == nullptr)
 		{
 			targetState = mCurrentState->Update();
+
+			if (mInspecting)
+			{
+				mCurrentState->Inspect();
+			}
+			
+			if (mAttemptToHide)
+			{
+				mCurrentState->Hide();
+			}
 
 			if (targetState != nullptr)
 			{
@@ -110,13 +180,13 @@ namespace DecisionMaking
 			}
 		}
 
-		return targetState;*/
-		if (mInspecting)
+		return targetState;
+		/*if (mInspecting)
 		{
 			mCurrentState->Inspect();
-		}
+		}*/
 
-		return mCurrentState->Update();
+		//return mCurrentState->Update();
 		//return std::shared_ptr<State>();
 	}
 

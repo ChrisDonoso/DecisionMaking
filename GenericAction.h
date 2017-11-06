@@ -20,6 +20,7 @@ namespace DecisionMaking
 		//ActionFunction Function() const;
 
 		GenericAction(std::function<void(const State&)> function);
+		GenericAction(std::function<void()> function);
 		/*{
 
 		}*/
@@ -34,6 +35,10 @@ namespace DecisionMaking
 
 		}*/
 
+		virtual void operator()() override;
+
+		//virtual bool operator()() override;
+
 		GenericAction& operator=(const GenericAction& rhs) = default;
 		/*{
 
@@ -45,5 +50,6 @@ namespace DecisionMaking
 		}*/
 		private:
 			std::function<void(const State&)> mFunction;
+			std::function<void()> mFunction2;
 	};
 }

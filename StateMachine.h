@@ -22,6 +22,18 @@ namespace DecisionMaking
 		void SetCurrentState(std::shared_ptr<State> state);
 		void SetInspecting(bool flag);
 		bool Inspecting();
+		void SetChase(bool flag);
+		bool Chase();
+		void SetBacktrack(bool flag);
+		bool Backtrack();
+		void SetHideSuccessful(bool flag);
+		bool HideSuccessful();
+		void SetAttemptToHide(bool flag);
+		bool AttemptingToHide();
+		void SetDead(bool flag);
+		bool Dead();
+		void SetFirstEncounter(bool flag);
+		bool FirstEncounter();
 		const std::map<std::string, std::shared_ptr<State>>& States();
 		std::shared_ptr<State> Update();
 
@@ -33,6 +45,12 @@ namespace DecisionMaking
 		std::hash_set<std::string> mPropertyBag;
 		//bool mFirstTimeEntered;
 		bool mInspecting;
+		bool mChase;
+		bool mBacktrack;
+		bool mHideSuccessful;
+		bool mAttemptToHide;
+		bool mDead;
+		bool mFirstEncounter;
 		//std::map<std::string, bool> mPropertyBag;
 	};
 }

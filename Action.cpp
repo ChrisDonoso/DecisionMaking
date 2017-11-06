@@ -7,6 +7,21 @@ namespace DecisionMaking
 	{
 	}
 
+	void Action::SetName(std::string name)
+	{
+		mName = name;
+	}
+
+	std::string Action::GetName()
+	{
+		return mName;
+	}
+
+	/*Action::Action(std::string name)
+	{
+		mName = name;
+	}*/
+
 	/*void Action::operator()(const State& state)
 	{
 		(void)state;

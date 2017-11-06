@@ -38,8 +38,11 @@ using namespace DecisionMaking;
 		StateMachine game;
 		StateMachine AI;
 
-		bool chase = 0;
-		bool backtrack = 0;
+		int value;
+		bool validCommand;
+
+		/*bool chase = 0;
+		bool backtrack = 0;*/
 
 		/*auto enter = make_shared<GenericAction>(Enter);
 		auto exit = make_shared<GenericAction>(Exit);*/
@@ -53,11 +56,11 @@ using namespace DecisionMaking;
 		{
 			if (state.FirstTimeEntered())
 			{
-				cout << state.Description() << endl;
+				cout << state.Description() << endl << endl;
 			}
 			else
 			{
-				cout << "You have entered the " << state.Name() << "." << endl;
+				cout << "You have entered the " << state.Name() << ".\n" << endl;
 			}
 			//cout << state.Name() << "::Enter()" << endl;
 
@@ -67,7 +70,8 @@ using namespace DecisionMaking;
 
 		auto exit = make_shared<GenericAction>([](const State& state)
 		{
-			(void)state;
+			//(void)state;
+			cout << "You have left the " << state.Name() << ".\n" << endl;
 			//cout << state.Name() << "::Exit()" << endl;
 			//cout << state.Description() << endl;
 		});
@@ -75,10 +79,41 @@ using namespace DecisionMaking;
 		auto inspect = make_shared<GenericAction>([](const State& state)
 		{
 			//(void)state;
-			cout << state.InspectionDescription() << endl;
+			cout << state.InspectionDescription() << endl << endl;
 			//cout << state.Name() << "::Exit()" << endl;
 			//cout << state.Description() << endl;
 		});
+
+		auto hide = make_shared<GenericAction>([&game]()
+		{
+			//(void)state;
+			if (game.HideSuccessful())
+			{
+				cout << "You have successfully hidden from the monster.\n" << endl;
+			}
+			else
+			{
+				cout << "You have unsuccessfully hidden from the monster and have been eaten.\n" << endl;
+				game.SetDead(true);
+			}
+			//if (state.)
+			//return (value % 2 == 0);
+			//cout << state.Name() << "::Exit()" << endl;
+			//cout << state.Description() << endl;
+		});
+
+		/*inspect->SetName("inspect");
+		hide->SetName("hide");*/
+
+		//auto hide = make_shared<GenericAction>([&value]()
+		//{
+		//	//(void)state;
+		//	//cout << "You have successfully hidden from the monster." << endl;
+		//	//if (state.)
+		//	return (value % 2 == 0);
+		//	//cout << state.Name() << "::Exit()" << endl;
+		//	//cout << state.Description() << endl;
+		//});
 
 		/*auto genericCondition = make_shared<GenericCondition>([]()
 		{
@@ -109,7 +144,7 @@ using namespace DecisionMaking;
 		shared_ptr<State> eightMonster = make_shared<State>("Laboratory");
 		shared_ptr<State> nineMonster = make_shared<State>("Catacombs");
 
-		game.SetInspect(inspect);
+		//game.SetInspect(inspect);
 
 		one->SetInspect(inspect);
 		two->SetInspect(inspect);
@@ -121,12 +156,22 @@ using namespace DecisionMaking;
 		eight->SetInspect(inspect);
 		nine->SetInspect(inspect);
 
+		one->SetHide(hide);
+		two->SetHide(hide);
+		three->SetHide(hide);
+		four->SetHide(hide);
+		five->SetHide(hide);
+		six->SetHide(hide);
+		seven->SetHide(hide);
+		eight->SetHide(hide);
+		nine->SetHide(hide);
+
 		//Add descriptions for the states.
 		one->SetDescription("You wake up in an unknown location, slightly dazed and confused. You look around you and you appear to be in the entry\nroom of a 12th century Gothic castle, "
 			"the walls garnished with red drapes, the cielings with broken chandeliers, and\nbroken statues encompassing the room. "
-			"The castle has a damp and cold feeling, as if it has not been inhabited for\nawhile. You notice a some big wooden doors to the South.");
+			"The castle has a damp and cold feeling, as if it has not been inhabited for\nawhile. You notice some big wooden doors to the South.");
 		two->SetDescription("As you enter the room, the doors behind you slam shut. You try to open them, but have no luck. You notice a long wooden\ntable in the center "
-			"of the room, with a chandeliers hanging above, and ripped flags hanging on the cobblestone walls.\nThere is a big eerire painting of a girl crying hanging on the center of the "
+			"of the room, with chandeliers hanging above it, and ripped flags hanging on the cobblestone walls.\nThere is a big eerire painting of a girl crying hanging on the center of the "
 			"wall on the right side of the room. You\nnotice a door to the South.");
 		three->SetDescription("You enter a small room with no windows. In the middle of the room you find an odd looking contraption that almost looks\nlike a coffin. You smell something "
 			"wretched coming from it, and open it. Upon opening it, you notice sharp metal spikes\nhanging from the cover, and lying in the contraption is a skeleton. You quickly close it and look for an exit. "
@@ -134,7 +179,7 @@ using namespace DecisionMaking;
 		four->SetDescription("You enter a small room, and in the middle you notice a forge, and in one of the corners you notice a furnace with an\nanvil next to it. Hanging on the walls are racks littered with "
 			"broken weapons. You notice doors to the North, East, and\nSouth.");
 		five->SetDescription("You open the locked door with your key, and have found a secret passage that leads to the garden outside. You have\nfound freedom and are happy that you got out of there alive!");
-		six->SetDescription("You enter a room with a workbench in the middle of it. There are nails scattered on the floors and tools scattered\naccross the workbench. You notice doors to the North and East.");
+		six->SetDescription("You enter a room with a workbench in the middle of it. There are nails scattered on the floor and tools scattered\naccross the workbench. You notice doors to the North and East.");
 		seven->SetDescription("You enter a very large room with bookshelves as high as the ceiling lining the walls. You look up and notice a mural\npainted on the ceiling. The mural seems dull and worn out, but "
 			"You can tell that it must have been majestic when it was\npainted. You notice doors to the East and West.");
 		eight->SetDescription("You enter a room with vials and tubes spread out on a table. There are papers with diagrams and formulas spread\nthroughout the entire room on the floors and walls. This "
@@ -145,7 +190,7 @@ using namespace DecisionMaking;
 
 		one->SetInspectionDescription("You find nothing.");
 		two->SetInspectionDescription("You inspect the painting further, and it no longer appears to be crying, but smiling.");
-		three->SetInspectionDescription("You notice a few of the strange contraption's spike on the ground.");
+		three->SetInspectionDescription("You notice a few of the strange contraption's spikes on the ground.");
 		four->SetInspectionDescription("You further inspect the weapon rack to look for a working weapon, but have no luck.");
 		six->SetInspectionDescription("You find nothing.");
 		seven->SetInspectionDescription("You notice a book sticking out of one of the shelves, and open it. You find a key inside! *Plays Legend of Zelda chest\nopening music.*");
@@ -253,26 +298,103 @@ using namespace DecisionMaking;
 
 		shared_ptr<State> temp = make_shared<State>();
 
-		while (game.CurrentState() != five)// && (game.CurrentState() != AI.CurrentState()))
+		// Intro Description
+		game.CurrentState()->Enter();
+
+		// Put in Initialize method?
+		AI.SetChase(false);
+		AI.SetBacktrack(false);
+		AI.SetAttemptToHide(false);
+		AI.SetFirstEncounter(true);
+		game.SetAttemptToHide(false);
+		game.SetDead(false);
+
+		while (game.CurrentState() != five && !game.Dead())// && (game.CurrentState() != AI.CurrentState()))
 		{
 			//cout << game.CurrentState()->Description() << endl;
 			temp = nullptr;
 
+			// Only print lengthy description upon first time entering state
 			game.CurrentState()->SetFirstTimeEntered(false);
 
-			cout << ">";
-			cin >> *command;
+			validCommand = false;
+
+			// User enters a command
+			while (!validCommand || *command == "list")
+			{
+				validCommand = false;
+
+				cout << ">";
+				cin >> *command;
+
+				if (*command == "list")
+				{
+					if (AI.Chase())
+					{
+						cout << "Available Commands: 'north', 'east', 'south', 'west', 'hide', 'inspect', 'exit'(Ends Game)." << endl;
+					}
+					else
+					{
+						cout << "Available Commands: 'north', 'east', 'south', 'west', 'inspect', 'exit'(Ends Game)." << endl;
+					}
+				}
+
+				if (AI.Chase())
+				{
+					if (*command == "north" || *command == "east" || *command == "south" || *command == "west" || *command == "hide" || *command == "inspect" || *command == "exit")
+					{
+						validCommand = true;
+					}
+				}
+				else
+				{
+					if (*command == "north" || *command == "east" || *command == "south" || *command == "west" || *command == "inspect" || *command == "exit")
+					{
+						validCommand = true;
+					}
+				}
+			}
+
+			cout << endl;
 
 			//strcpy((char*)&command, (char*)tolower(&command));
 			//command = tolower(command);
 
 			//cout << "Current state: " << game.CurrentState()->Name() << endl;
 
+			// Exit the game
 			if (*command == "exit")
 			{
 				break;
 			}
+			
+			// If the player is being chased, they can hide
+			if (AI.Chase())
+			{
+				if (*command == "hide")
+				{
+					//game.SetHide(true);
+					game.SetAttemptToHide(true);
 
+					value = rand();
+
+					game.SetHideSuccessful(value % 2 == 0);
+
+					if (game.HideSuccessful())
+					{
+						AI.SetChase(false);
+					}
+
+					//cout << game.HideSuccessful () << endl;
+					//game.SetHide(game.CurrentState()->Hide());
+				}
+				else
+				{
+					game.SetAttemptToHide(false);
+				}
+			}
+
+			// Inspect the room
 			if (*command == "inspect")
 			{
 				game.SetInspecting(true);
@@ -295,6 +417,7 @@ using namespace DecisionMaking;
 				game.SetInspecting(false);
 			}
 
+			// Player cannot enter the Garden (State five) unless they have the key - this is the exit and triggers game over
 			if (*command == "north" && game.CurrentState() == four)
 			{
 				if (game.GetProperty("key"))
@@ -303,15 +426,30 @@ using namespace DecisionMaking;
 				}
 				else
 				{
-					cout << "The door appears to be locked." << endl;
+					cout << "The door appears to be locked.\n" << endl;
 				}
 			}
 			else
 			{	
 				if (game.CurrentState() == eight && game.Inspecting())
 				{
-					temp = game.Update();
+					game.CurrentState()->Inspect();
+					game.SetInspecting(false);
+					game.CurrentState()->Exit();
 					temp = four;
+					temp->Enter();
+
+					// Player has teleported away from the monster
+					if (AI.CurrentState() != threeMonster && AI.CurrentState() != sixMonster)
+					{
+						AI.SetChase(false);
+					}
+					//temp = game.Update();
+					//game.CurrentState()
+					//temp = four;
+
+					//temp = game.Update();
+					//temp = four;
 				}
 				else
 				{
@@ -328,8 +466,9 @@ using namespace DecisionMaking;
 				temp = game.Update();
 			}*/
 
-			// AI Controller
-			if (chase)
+			/** AI Controller **/
+			// AI follows player
+			if (AI.Chase())
 			{
 				if (game.CurrentState() == two)
 				{
@@ -361,15 +500,16 @@ using namespace DecisionMaking;
 				}
 				//AI.SetCurrentState(game.CurrentState());
 			}
+			// AI is not chasing player, it moves in its patrol formation
 			else
 			{
 				if (AI.CurrentState() == nineMonster)
 				{
-					backtrack = 0;
+					AI.SetBacktrack(false);
 
 					if (game.CurrentState() == eight)
 					{
-						chase = 1;
+						AI.SetChase(true);
 					}
 
 					AI.SetCurrentState(eightMonster);
@@ -378,10 +518,10 @@ using namespace DecisionMaking;
 				{
 					if (game.CurrentState() == nine || game.CurrentState() == seven)
 					{
-						chase = 1;
+						AI.SetChase(true);
 					}
 
-					if (backtrack)
+					if (AI.Backtrack())
 					{
 						AI.SetCurrentState(nineMonster);
 					}
@@ -394,10 +534,10 @@ using namespace DecisionMaking;
 				{
 					if (game.CurrentState() == eight || game.CurrentState() == six)
 					{
-						chase = 1;
+						AI.SetChase(true);
 					}
 
-					if (backtrack)
+					if (AI.Backtrack())
 					{
 						AI.SetCurrentState(eightMonster);
 					}
@@ -410,7 +550,7 @@ using namespace DecisionMaking;
 				{
 					if (game.CurrentState() == seven || game.CurrentState() == four)
 					{
-						chase = 1;
+						AI.SetChase(true);
 					}
 
 					AI.SetCurrentState(fourMonster);
@@ -419,7 +559,7 @@ using namespace DecisionMaking;
 				{
 					if (game.CurrentState() == six || game.CurrentState() == three)
 					{
-						chase = 1;
+						AI.SetChase(true);
 					}
 
 					AI.SetCurrentState(threeMonster);
@@ -428,17 +568,28 @@ using namespace DecisionMaking;
 				{
 					if (game.CurrentState() == four || game.CurrentState() == seven || game.CurrentState() == two)
 					{
-						chase = 1;
+						AI.SetChase(true);
 					}
 
-					backtrack = 1;
+					AI.SetBacktrack(true);
 					AI.SetCurrentState(sevenMonster);
 				}
 			}
 
-			if (chase)
+			if (AI.Chase() && !game.Dead())
 			{
-				cout << "THE MONSTER IS CHASING YOU! RUN!!!" << endl;
+				if (AI.FirstEncounter())
+				{
+					AI.SetFirstEncounter(false);
+
+					cout << "\nYou feel some kind of liquid drip onto your head. You run your fingers through your hair, it feels sticky. You try to\nbrush it off but another drop hits your head. You "
+						"look up and are immediately struck with fear. Standing right above\nyou is some kind of grey and purple demon with six legs and the biggest horns you've ever seen. It opens its "
+						"mouth to\nroar and you notice it has very sharp jagged teeth. The monster changes its stance as if it's going to start chasing\nyou. LEAVE THE ROOM OR HIDE!!!\n" << endl;
+				}
+				else
+				{
+					cout << "\nTHE MONSTER IS CHASING YOU! RUN!!!\n" << endl;
+				}
 			}
 
 			if (temp != nullptr)

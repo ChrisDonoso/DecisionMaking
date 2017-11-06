@@ -21,14 +21,17 @@ namespace DecisionMaking
 		void Enter();
 		void Exit();
 		void Inspect();
+		void Hide();
 		std::shared_ptr<Action> GetEnter();
 		std::shared_ptr<Action> GetExit();
 		std::shared_ptr<Action> GetInspect();
+		std::shared_ptr<Action> GetHide();
 		const std::string& Name() const;
 		//State& operator=(const State& state);
 		void SetEnter(std::shared_ptr<Action> enter);
 		void SetExit(std::shared_ptr<Action> exit);
 		void SetInspect(std::shared_ptr<Action> inspect);
+		void SetHide(std::shared_ptr<Action> hide);
 		void SetName(std::string name);
 		void SetDescription(std::string description);
 		const std::string& Description() const;
@@ -48,6 +51,7 @@ namespace DecisionMaking
 		std::shared_ptr<Action> mEnter;
 		std::shared_ptr<Action> mExit;
 		std::shared_ptr<Action> mInspect;
+		std::shared_ptr<Action> mHide;
 		std::string mName;
 		std::string mDescription;
 		std::string mInspectDescription;
