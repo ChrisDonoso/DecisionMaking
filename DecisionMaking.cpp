@@ -298,6 +298,8 @@ using namespace DecisionMaking;
 
 		shared_ptr<State> temp = make_shared<State>();
 
+		cout << "**Type 'list' to get a list of available commands at any moment.**\n" << endl;
+
 		// Intro Description
 		game.CurrentState()->Enter();
 
