@@ -17,11 +17,19 @@ namespace DecisionMaking
 		//http://en.cppreference.com/w/cpp/container/map/emplace
 
 
-		mStates.emplace(std::make_pair(state->Name(), state));
+		//mStates.emplace(std::make_pair(state->Name(), state));
 		
-		//mStates.emplace("one", state);
+		mStates.emplace(state->Name(), state);
 
 
+	}
+
+	void StateMachine::AddStates(std::initializer_list<std::shared_ptr<State>> states)
+	{
+		for (const auto& state : states)
+		{
+			mStates.emplace(state->Name(), state);
+		}
 	}
 
 	//void StateMachine::AddStates(std::map<std::string, std::shared_ptr<State>> states)
@@ -36,7 +44,13 @@ namespace DecisionMaking
 
 	void StateMachine::Initialize()
 	{
-
+		mInspecting = false;
+		mChase = false;
+		mBacktrack = false;
+		mHideSuccessful = false;
+		mAttemptToHide = false;
+		mDead = false;
+		mFirstEncounter = true;
 	}
 
 	/*void StateMachine::AddProperty(std::string propertyName, bool flag)

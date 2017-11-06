@@ -38,8 +38,8 @@ using namespace DecisionMaking;
 		StateMachine game;
 		StateMachine AI;
 
-		int value;
-		bool validCommand;
+		AI.Initialize();
+		game.Initialize();
 
 		/*bool chase = 0;
 		bool backtrack = 0;*/
@@ -144,6 +144,43 @@ using namespace DecisionMaking;
 		shared_ptr<State> eightMonster = make_shared<State>("Laboratory");
 		shared_ptr<State> nineMonster = make_shared<State>("Catacombs");
 
+		auto gameStates = { one, two, three, four, five, six, seven, eight, nine };
+		//Adding states.
+		game.AddStates(gameStates);
+
+		auto AIStates = { twoMonster, threeMonster, fourMonster, sixMonster, sevenMonster, eightMonster, nineMonster };
+
+		AI.AddStates(AIStates);
+
+		/*game.AddState(one);
+		game.AddState(two);
+		game.AddState(three);
+		game.AddState(four);
+		game.AddState(five);
+		game.AddState(six);
+		game.AddState(seven);
+		game.AddState(eight);
+		game.AddState(nine);*/
+
+		//Adding states for AI.
+		/*AI.AddState(one);
+		AI.AddState(two);
+		AI.AddState(three);
+		AI.AddState(four);
+		AI.AddState(five);
+		AI.AddState(six);
+		AI.AddState(seven);
+		AI.AddState(eight);
+		AI.AddState(nine);*/
+
+		/*AI.AddState(twoMonster);
+		AI.AddState(threeMonster);
+		AI.AddState(fourMonster);
+		AI.AddState(sixMonster);
+		AI.AddState(sevenMonster);
+		AI.AddState(eightMonster);
+		AI.AddState(nineMonster);*/
+
 		//game.SetInspect(inspect);
 
 		one->SetInspect(inspect);
@@ -196,36 +233,6 @@ using namespace DecisionMaking;
 		seven->SetInspectionDescription("You notice a book sticking out of one of the shelves, and open it. You find a key inside! *Plays Legend of Zelda chest\nopening music.*");
 		eight->SetInspectionDescription("You notice a weird circular pattern on the ground, and walk inside of it. All of a sudden your body feels light, and\nyou find yourself in a different room.");
 		nine->SetInspectionDescription("Among all of the bones on the ground, in the center of the room you see what appears to be a fresh mutilated corpse.");
-
-		//Adding states.
-		game.AddState(one);
-		game.AddState(two);
-		game.AddState(three);
-		game.AddState(four);
-		game.AddState(five);
-		game.AddState(six);
-		game.AddState(seven);
-		game.AddState(eight);
-		game.AddState(nine);
-
-		//Adding states for AI.
-		/*AI.AddState(one);
-		AI.AddState(two);
-		AI.AddState(three);
-		AI.AddState(four);
-		AI.AddState(five);
-		AI.AddState(six);
-		AI.AddState(seven);
-		AI.AddState(eight);
-		AI.AddState(nine);*/
-
-		AI.AddState(twoMonster);
-		AI.AddState(threeMonster);
-		AI.AddState(fourMonster);
-		AI.AddState(sixMonster);
-		AI.AddState(sevenMonster);
-		AI.AddState(eightMonster);
-		AI.AddState(nineMonster);
 
 		//auto oneToTwo = make_shared<Transition>(one, genericCondition);
 		//one->AddTransition(oneToTwo);
@@ -303,13 +310,11 @@ using namespace DecisionMaking;
 		// Intro Description
 		game.CurrentState()->Enter();
 
-		// Put in Initialize method?
-		AI.SetChase(false);
-		AI.SetBacktrack(false);
-		AI.SetAttemptToHide(false);
-		AI.SetFirstEncounter(true);
-		game.SetAttemptToHide(false);
-		game.SetDead(false);
+		bool validCommand;
+
+		clock_t timer = 0;
+
+		srand(static_cast<unsigned int>(time(nullptr)));
 
 		while (game.CurrentState() != five && !game.Dead())// && (game.CurrentState() != AI.CurrentState()))
 		{
@@ -325,9 +330,23 @@ using namespace DecisionMaking;
 			while (!validCommand || *command == "list")
 			{
 				validCommand = false;
+				timer = clock();
 
 				cout << ">";
 				cin >> *command;
+
+				if (clock() - timer >= 5000 && AI.Chase())
+				{
+					cout << "\nYou took too long to react and the monster has eaten you!" << endl;
+					game.SetDead(true);
+					break;
+				}
+
+				// Convert user input to lower case
+				for (unsigned int i = 0; i < command->length(); i++)
+				{
+					(*command)[i] = (char)tolower((*command)[i]);
+				}
 
 				if (*command == "list")
 				{
@@ -359,6 +378,12 @@ using namespace DecisionMaking;
 
 			cout << endl;
 
+			// Player took to long to respond and has died in this case
+			if (game.Dead())
+			{
+				break;
+			}
+
 			//strcpy((char*)&command, (char*)tolower(&command));
 			//command = tolower(command);
 
@@ -378,9 +403,9 @@ using namespace DecisionMaking;
 					//game.SetHide(true);
 					game.SetAttemptToHide(true);
 
-					value = rand();
+					//value = rand();
 
-					game.SetHideSuccessful(value % 2 == 0);
+					game.SetHideSuccessful(rand() % 2);
 
 					if (game.HideSuccessful())
 					{
@@ -456,17 +481,18 @@ using namespace DecisionMaking;
 				else
 				{
 					temp = game.Update();
+
+					if (game.AttemptingToHide())
+					{
+						if (game.HideSuccessful())
+						{
+							game.SetHideSuccessful(false);
+						}
+
+						game.SetAttemptToHide(false);
+					}
 				}
 			}
-
-			/*if (game.CurrentState() == four && game.GetProperty("key") && *command == "north")
-			{
-				temp = game.Update();
-			}
-			else
-			{
-				temp = game.Update();
-			}*/
 
 			/** AI Controller **/
 			// AI follows player
@@ -578,19 +604,19 @@ using namespace DecisionMaking;
 				}
 			}
 
-			if (AI.Chase() && !game.Dead())
+			if (AI.Chase() && !game.Dead() && game.CurrentState() != five)
 			{
 				if (AI.FirstEncounter())
 				{
 					AI.SetFirstEncounter(false);
 
-					cout << "\nYou feel some kind of liquid drip onto your head. You run your fingers through your hair, it feels sticky. You try to\nbrush it off but another drop hits your head. You "
+					cout << "You feel some kind of liquid drip onto your head. You run your fingers through your hair, it feels sticky. You try to\nbrush it off but another drop hits your head. You "
 						"look up and are immediately struck with fear. Standing right above\nyou is some kind of grey and purple demon with six legs and the biggest horns you've ever seen. It opens its "
-						"mouth to\nroar and you notice it has very sharp jagged teeth. The monster changes its stance as if it's going to start chasing\nyou. LEAVE THE ROOM OR HIDE!!!\n" << endl;
+						"mouth to\nroar and you notice it has very sharp jagged teeth. The monster changes its stance as if it's going to start chasing\nyou. LEAVE THE ROOM OR HIDE('hide')!!!\n" << endl;
 				}
 				else
 				{
-					cout << "\nTHE MONSTER IS CHASING YOU! RUN!!!\n" << endl;
+					cout << "THE MONSTER IS CHASING YOU! RUN!!!\n" << endl;
 				}
 			}
 

@@ -10,7 +10,7 @@ namespace DecisionMaking
 		StateMachine();
 
 		void AddState(std::shared_ptr<State> state);
-		void AddStates(std::map<std::string, std::shared_ptr<State>> states);
+		void AddStates(std::initializer_list<std::shared_ptr<State>> states);
 		std::shared_ptr<State> CurrentState();
 		void Initialize();
 		//StateMachine& operator=();
