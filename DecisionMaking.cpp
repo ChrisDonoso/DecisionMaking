@@ -148,8 +148,34 @@ int main(void)
 	three->SetInspectionDescription("You notice a few of the strange contraption's spikes on the ground.");
 	four->SetInspectionDescription("You further inspect the weapon rack to look for a working weapon, but have no luck.");
 	six->SetInspectionDescription("You find nothing.");
-	seven->SetInspectionDescription("You notice a book sticking out of one of the shelves, and open it. You find a key inside! *Plays Legend of Zelda chest\nopening music.*");
-	eight->SetInspectionDescription("You notice a weird circular pattern on the ground, and walk inside of it. All of a sudden your body feels light, and\nyou find yourself in a different room.");
+	seven->SetInspectionDescription("	8 8 8 8                      ,ooo.\n"
+									"	8a8 8a8                     oP   ?b\n"
+									"	d888a888zzzzzzzzzzzzzzzzzzzz8     8b\n"
+									"	   `""^""'                      ?o___oP'\n\n"
+		
+									"You notice a book sticking out of one of the shelves, and open it. You find a key inside! *Plays Legend of Zelda chest\nopening music.*");
+	eight->SetInspectionDescription(
+		"                   .d$$$$*$$$$$$bc\n"
+		"               .d$P      d$$     *$$.\n"
+		"              d$        4$$$       $$.\n"
+		"             4$P        $F ^$F       $c\n"
+		"            z$%        d$   3$        ^$L\n"
+		"           4$$$$$$$$$$$$$$$$$$$$$$$$$$$$$F\n"
+		"           $$$F       d$     3$      C$$*$\n"
+		"          .$% $$e    d$       3$   z$$  $F\n"
+		"          4$    *$$.4$         $$d$P     $$\n"
+		"          4$      ^*$$.       .d$F       $$\n"
+		"          4$       d$ $$c   z$$3$       $F\n"
+		"           $L     4$   ^*$$$P   $$      4$\n"
+		"           3$     $F   .d$P$$e   ^$F    $P\n"
+		"            $$   d$  .$$      $$c 3$   d$\n"
+		"             *$.4$ z$$         ^*$$$$ $$\n"
+		"              $$$$P               $$$P\n"
+		"                *$b.             .d$P\n"
+		"                   $$$ec.....ze$$$\n"
+		"                       **$$$**\n\n"
+		
+									"You notice a weird circular pattern on the ground, and walk inside of it. All of a sudden your body feels light, and\nyou find yourself in a different room.");
 	nine->SetInspectionDescription("Among all of the bones on the ground, in the center of the room you see what appears to be a fresh mutilated corpse.");
 
 	game.SetCurrentState(one);
