@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "EqualsCondition.h"
 
 namespace DecisionMaking

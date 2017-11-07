@@ -1,15 +1,20 @@
 // DecisionMaking.cpp : Defines the entry point for the console application.
 //
 
+/*
+DecisionMaking by Tyler Olechnowicz and Christopher Donoso
+Due: 11/6/17
+Class: CAP 4053
+Professor: Dr. Varcholik
+*/
+
 #include "pch.h"
-//#include "DecisionMaking.h">
 
 #include "StateMachine.h"
 #include "State.h"
 #include "Action.h"
 #include "GenericAction.h"
 #include "Condition.h"
-#include "GenericCondition.h"
 #include "EqualsCondition.h"	
 #include "Transition.h"
 
@@ -65,11 +70,6 @@ int main(void)
 			game.SetDead(true);
 		}
 	});
-
-	/*auto genericCondition = make_shared<GenericCondition>([]()
-	{
-			
-	});*/
 
 	//Creating states.
 	shared_ptr<State> one = make_shared<State>("Foyer", enter, exit); //one
@@ -187,9 +187,8 @@ int main(void)
 	shared_ptr<EqualsCondition> eastMovement = make_shared<EqualsCondition>("east", command);
 	shared_ptr<EqualsCondition> southMovement = make_shared<EqualsCondition>("south", command);
 	shared_ptr<EqualsCondition> westMovement = make_shared<EqualsCondition>("west", command);
-	//shared_ptr<EqualsCondition> inspectCondition = make_shared<EqualsCondition>("inspect", command);
-	//shared_ptr<EqualsCondition> exitCommand = make_shared<EqualsCondition>("exit", command);
 
+	// Make the transitions between states
 	auto oneToTwo = make_shared<Transition>(two, southMovement);
 	auto twoToThree = make_shared<Transition>(three, southMovement);
 	auto threeToTwo = make_shared<Transition>(two, northMovement);
@@ -205,9 +204,8 @@ int main(void)
 	auto eightToSeven = make_shared<Transition>(seven, westMovement);
 	auto eightToNine = make_shared<Transition>(nine, eastMovement);
 	auto nineToEight = make_shared<Transition>(eight, westMovement);
-	/*auto exit = make_shared<Transition>(exitCommand);
-	game.AddTransition(exit);*/
 
+	// Add the transitions to the states
 	one->AddTransition(oneToTwo);
 	two->AddTransition(twoToThree);
 	three->AddTransition(threeToTwo);
@@ -239,6 +237,7 @@ int main(void)
 
 	srand(static_cast<unsigned int>(time(nullptr)));
 
+	// Start game
 	while (game.CurrentState() != five && !game.Dead())
 	{
 		temp = nullptr;
@@ -380,6 +379,7 @@ int main(void)
 		}
 		else
 		{	
+			// Inspecting state eight triggers teleportation
 			if (game.CurrentState() == eight && game.Inspecting())
 			{
 				game.CurrentState()->Inspect();
@@ -539,7 +539,7 @@ int main(void)
 					"    ___    |         .'    \\ \\  `._,-'     `-\n"
 					"        `.__,`---^---'       \\ ` -'\n"
 					"           -.______  \\ . /  ______,-\n"
-					"                   `.     ,'            " << endl;
+					"                   `.     ,'            \n" << endl;
 
 
 				cout << "You feel some kind of liquid drip onto your head. You run your fingers through your hair, it feels sticky. You try to\nbrush it off but another drop hits your head. You "

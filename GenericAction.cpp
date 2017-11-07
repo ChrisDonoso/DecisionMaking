@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "GenericAction.h"
 
 namespace DecisionMaking

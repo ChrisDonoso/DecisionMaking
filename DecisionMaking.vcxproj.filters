@@ -36,13 +36,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ActionList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GenericAction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GenericCondition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EqualsCondition.cpp">
@@ -65,16 +59,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DecisionMaking.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GenericAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GenericCondition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EqualsCondition.h">
@@ -83,10 +68,5 @@
     <ClInclude Include="Transition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Graph.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>
