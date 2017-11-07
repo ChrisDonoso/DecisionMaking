@@ -558,5 +558,8 @@ int main(void)
 		}
 	}
 
+	// Had to add this for some reason
+	system("pause");
+
 	return 0;
 }
