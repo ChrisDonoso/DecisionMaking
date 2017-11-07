@@ -497,6 +497,25 @@ int main(void)
 		{
 			if (AI.FirstEncounter())
 			{
+				cout <<
+					"         (                       )\n"
+					"         |\\    _,--------._    / |\n"
+					"         | `.,'            `. /  |\n"
+					"         `  '              ,-'   '\n"
+					"          \\/_         _   (     /\n"
+					"         (,-.`.    ,',-.`. `__,'\n"
+					"          |/#\\ ),-','#\\`= ,'.` |\n"
+					"          `._/)  -'.\\_,'   ) ))|\n"
+					"          /  (_.)\\     .   -'//\n"
+					"         (  /\\____/\\    ) )`'\\\n"
+					"          \\ |V----V||  ' ,    \\\n"
+					"           |`- -- -'   ,'   \\  \\      _____\n"
+					"    ___    |         .'    \\ \\  `._,-'     `-\n"
+					"        `.__,`---^---'       \\ ` -'\n"
+					"           -.______  \\ . /  ______,-\n"
+					"                   `.     ,'            " << endl;
+
+
 				cout << "You feel some kind of liquid drip onto your head. You run your fingers through your hair, it feels sticky. You try to\nbrush it off but another drop hits your head. You "
 					"look up and are immediately struck with fear. Standing right above\nyou is some kind of grey and purple demon with six legs and the biggest horns you've ever seen. It opens its "
 					"mouth to\nroar and you notice it has very sharp jagged teeth. The monster changes its stance as if it's going to start chasing\nyou. LEAVE THE ROOM OR HIDE('hide')!!!\n" << endl;
