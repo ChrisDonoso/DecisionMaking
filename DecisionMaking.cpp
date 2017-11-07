@@ -156,7 +156,6 @@ int main(void)
 	AI.SetCurrentState(nineMonster);
 
 	shared_ptr<string> command = make_shared<string>();
-	string command2;
 
 	shared_ptr<EqualsCondition> northMovement = make_shared<EqualsCondition>("north", command);
 	shared_ptr<EqualsCondition> eastMovement = make_shared<EqualsCondition>("east", command);
@@ -232,38 +231,27 @@ int main(void)
 			cout << ">";
 			cin >> *command;
 
-			/*if (AI.Chase() && !game.Dead() && game.CurrentState() != five)
+			if (AI.Chase())
 			{
 				if (AI.FirstEncounter())
 				{
 					AI.SetFirstEncounter(false);
 
-					cout << "You feel some kind of liquid drip onto your head. You run your fingers through your hair, it feels sticky. You try to\nbrush it off but another drop hits your head. You "
-						"look up and are immediately struck with fear. Standing right above\nyou is some kind of grey and purple demon with six legs and the biggest horns you've ever seen. It opens its "
-						"mouth to\nroar and you notice it has very sharp jagged teeth. The monster changes its stance as if it's going to start chasing\nyou. LEAVE THE ROOM OR HIDE('hide')!!!\n" << endl;
+					if (clock() - timer >= TEN_SECONDS && AI.Chase())
+					{
+						cout << "\nYou took too long to react and the monster has eaten you!" << endl;
+						game.SetDead(true);
+						break;
+					}
 				}
 				else
 				{
-					cout << "THE MONSTER IS CHASING YOU! RUN!!!\n" << endl;
-				}
-			}*/
-
-			if (AI.FirstEncounter())
-			{
-				if (clock() - timer >= TEN_SECONDS && AI.Chase())
-				{
-					cout << "\nYou took too long to react and the monster has eaten you!" << endl;
-					game.SetDead(true);
-					break;
-				}
-			}
-			else
-			{
-				if (clock() - timer >= FIVE_SECONDS && AI.Chase())
-				{
-					cout << "\nYou took too long to react and the monster has eaten you!" << endl;
-					game.SetDead(true);
-					break;
+					if (clock() - timer >= FIVE_SECONDS && AI.Chase())
+					{
+						cout << "\nYou took too long to react and the monster has eaten you!" << endl;
+						game.SetDead(true);
+						break;
+					}
 				}
 			}
 
@@ -273,6 +261,7 @@ int main(void)
 				(*command)[i] = (char)tolower((*command)[i]);
 			}
 
+			// Show the user a list of commands
 			if (*command == "list")
 			{
 				if (AI.Chase())
@@ -504,12 +493,10 @@ int main(void)
 			}
 		}
 
-		/*if (AI.Chase() && !game.Dead() && game.CurrentState() != five)
+		if (AI.Chase() && !game.Dead() && game.CurrentState() != five)
 		{
 			if (AI.FirstEncounter())
 			{
-				AI.SetFirstEncounter(false);
-
 				cout << "You feel some kind of liquid drip onto your head. You run your fingers through your hair, it feels sticky. You try to\nbrush it off but another drop hits your head. You "
 					"look up and are immediately struck with fear. Standing right above\nyou is some kind of grey and purple demon with six legs and the biggest horns you've ever seen. It opens its "
 					"mouth to\nroar and you notice it has very sharp jagged teeth. The monster changes its stance as if it's going to start chasing\nyou. LEAVE THE ROOM OR HIDE('hide')!!!\n" << endl;
@@ -518,7 +505,7 @@ int main(void)
 			{
 				cout << "THE MONSTER IS CHASING YOU! RUN!!!\n" << endl;
 			}
-		}*/
+		}
 
 		if (temp != nullptr)
 		{
