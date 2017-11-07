@@ -21,9 +21,7 @@ namespace DecisionMaking
 
 	bool Transition::IsTriggered()
 	{
-		return  (*mCondition)(); // (*this);
-		//return mCondition->operator();
-		//return false;
+		return  (*mCondition)();
 	}
 
 	void Transition::SetCondition(std::shared_ptr<Condition> condition)
@@ -40,12 +38,6 @@ namespace DecisionMaking
 	{
 		return mTarget;
 	}
-
-	//std::shared_ptr<State> Transition::Target()
-	//{
-	//	return std::shared_ptr<State>();
-	//}
-
 
 	Transition::~Transition()
 	{

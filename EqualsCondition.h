@@ -13,7 +13,7 @@ namespace DecisionMaking
 		EqualsCondition();
 		EqualsCondition(std::string direction, std::shared_ptr<std::string> command);
 
-		virtual bool operator()() override; // const Transition& transition) override;//const State& state) override;
+		virtual bool operator()() override;
 
 		EqualsCondition& operator=(const EqualsCondition& rhs) = default;
 

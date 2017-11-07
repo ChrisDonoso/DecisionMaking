@@ -14,8 +14,6 @@ namespace DecisionMaking
 		std::shared_ptr<State> CurrentState();
 		void Initialize();
 		//StateMachine& operator=();
-		/*void AddProperty(std::string propertyName, bool flag);
-		bool GetProperty(std::string key);*/
 		void AddProperty(std::string key);
 		void RemoveProperty(std::string key);
 		bool GetProperty(std::string);
@@ -43,7 +41,6 @@ namespace DecisionMaking
 		std::shared_ptr<State> mCurrentState;
 		std::map<std::string, std::shared_ptr<State>> mStates;
 		std::hash_set<std::string> mPropertyBag;
-		//bool mFirstTimeEntered;
 		bool mInspecting;
 		bool mChase;
 		bool mBacktrack;
@@ -51,6 +48,5 @@ namespace DecisionMaking
 		bool mAttemptToHide;
 		bool mDead;
 		bool mFirstEncounter;
-		//std::map<std::string, bool> mPropertyBag;
 	};
 }

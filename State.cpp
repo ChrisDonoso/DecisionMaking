@@ -34,8 +34,6 @@ namespace DecisionMaking
 
 	void State::AddTransition(std::shared_ptr<Transition> transition)
 	{
-		//mTransitions.insert(transition);
-		//mStates.emplace(std::make_pair(state->Name(), state));
 		mTransitions.push_back(transition);
 	}
 
@@ -103,10 +101,7 @@ namespace DecisionMaking
 
 	//State & State::operator=(const State& state)
 	//{
-	//	//(void)state;
-	//		//State target = state;
 	//	// TODO: insert return statement here
-	//	//return state;
 	//}
 
 	void State::SetEnter(std::shared_ptr<Action> enter)

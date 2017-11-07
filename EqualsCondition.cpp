@@ -12,17 +12,14 @@ namespace DecisionMaking
 		mCommand = command;
 	}
 
-	bool EqualsCondition::operator()()//const Transition& transition)//const State & state)
+	bool EqualsCondition::operator()()
 	{
 		if (mDirection.compare(*mCommand) == 0)
 		{
 			return true;
 		}
-		//(void)transition;
+
 		return false;
-		//return mDirection// = *mCommand;
-		/*(void)transition;
-		return false;*/
 	}
 
 
@@ -33,6 +30,5 @@ namespace DecisionMaking
 
 	EqualsCondition::~EqualsCondition()
 	{
-
 	}
 }

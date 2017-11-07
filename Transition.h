@@ -1,10 +1,10 @@
 #pragma once
 #include "pch.h"
-#include "Condition.h"
 
 namespace DecisionMaking
 {
 	class State;
+	class Condition;
 
 	class Transition
 	{

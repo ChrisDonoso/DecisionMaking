@@ -1,7 +1,5 @@
 #pragma once
 #include "pch.h"
-//#include "Action.h"
-//#include "Transition.h"
 
 namespace DecisionMaking
 {
@@ -56,9 +54,7 @@ namespace DecisionMaking
 		std::string mDescription;
 		std::string mInspectDescription;
 		std::vector<std::shared_ptr<Transition>> mTransitions;
-		//std::unordered_set<std::
 		std::hash_set<std::string> mPropertyBag;
 		bool mFirstTimeEntered;
-		//std::map<std::string, bool> mPropertyBag;
 	};
 }

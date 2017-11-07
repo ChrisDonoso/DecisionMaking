@@ -7,14 +7,4 @@ namespace DecisionMaking
 	Condition::Condition()
 	{
 	}
-
-	/*bool Condition::operator()()
-	{
-		return false;
-	}*/
-
-
-	/*Condition::~Condition()
-	{
-	}*/
 }

@@ -8,20 +8,8 @@ namespace DecisionMaking
 	}
 
 	void StateMachine::AddState(std::shared_ptr<State> state)
-	{
-		//mStates.insert(state->Name, state);
-		//mStates.insert("one", state);
-
-
-		//I think it's one of these two for insertion. I think it's the make_pair, but I'm not sure.
-		//http://en.cppreference.com/w/cpp/container/map/emplace
-
-
-		//mStates.emplace(std::make_pair(state->Name(), state));
-		
+	{	
 		mStates.emplace(state->Name(), state);
-
-
 	}
 
 	void StateMachine::AddStates(std::initializer_list<std::shared_ptr<State>> states)
@@ -31,11 +19,6 @@ namespace DecisionMaking
 			mStates.emplace(state->Name(), state);
 		}
 	}
-
-	//void StateMachine::AddStates(std::map<std::string, std::shared_ptr<State>> states)
-	//{
-	//	//mStates.insert(states);
-	//}
 
 	std::shared_ptr<State> StateMachine::CurrentState()
 	{
@@ -52,16 +35,6 @@ namespace DecisionMaking
 		mDead = false;
 		mFirstEncounter = true;
 	}
-
-	/*void StateMachine::AddProperty(std::string propertyName, bool flag)
-	{
-		mPropertyBag.emplace(propertyName, flag);
-	}
-
-	bool StateMachine::GetProperty(std::string key)
-	{
-		return mPropertyBag[key];
-	}*/
 
 	void StateMachine::AddProperty(std::string key)
 	{
@@ -80,14 +53,7 @@ namespace DecisionMaking
 
 	void StateMachine::SetCurrentState(std::shared_ptr<State> state)
 	{
-		/*if (mCurrentState != nullptr)
-		{
-			mCurrentState->Exit();
-		}*/
-
 		mCurrentState = state;
-
-		//mCurrentState->Enter();
 	}
 
 	void StateMachine::SetInspecting(bool flag)
@@ -162,7 +128,6 @@ namespace DecisionMaking
 
 	const std::map<std::string, std::shared_ptr<State>>& StateMachine::States()
 	{
-		// TODO: insert return statement here
 		return mStates;
 	}
 
@@ -195,13 +160,6 @@ namespace DecisionMaking
 		}
 
 		return targetState;
-		/*if (mInspecting)
-		{
-			mCurrentState->Inspect();
-		}*/
-
-		//return mCurrentState->Update();
-		//return std::shared_ptr<State>();
 	}
 
 
